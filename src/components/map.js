@@ -4,6 +4,14 @@ import { G_KEY } from "../util/auth.js";
 
 export class MapContainer extends Component {
   render() {
+    const {
+      mapCenter,
+      mapMarkerList,
+      mapZoom,
+      placesList,
+      placeSelected
+    } = this.props;
+
     return (
       <Map
         className="map"
@@ -15,11 +23,8 @@ export class MapContainer extends Component {
           height: "100%",
           width: "100%"
         }}
-        zoom={12}
-        initialCenter={{
-          lat: 35.465076,
-          lng: -97.507373
-        }}
+        zoom={mapZoom}
+        initialCenter={mapCenter}
       />
     );
   }
