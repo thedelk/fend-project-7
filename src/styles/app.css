@@ -31,10 +31,10 @@ ol, li {
   padding: .8rem;
 }
 
-.map {
-  -webkit-box-flex: 3;
-      -ms-flex: 3;
-          flex: 3;
+.col-map {
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
   position: relative;
 }
 
