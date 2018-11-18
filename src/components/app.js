@@ -3,6 +3,7 @@ import "../styles/app.css";
 import { getPlacesData } from "../util/requests";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
+import Header from "./header";
 
 export default class App extends Component {
   state = {
@@ -79,23 +80,10 @@ export default class App extends Component {
     } = this.state;
 
     return (
-      // <div role="application">
-      <main className="container" role="application">
-        <Sidebar
-          deselectMarker={this.deselectMarker}
-          mapCenter={mapCenter}
-          mapZoom={mapZoom}
-          markerInfoWindowShowing={markerInfoWindowShowing}
-          markerList={markerList}
-          markerRef={this.getMarkerRef}
-          markerSelected={markerSelected}
-          selectMarker={this.selectMarker}
-          placeDetails={placeDetails}
-          placeList={placeList}
-          placeSelected={placeSelected}
-        />
-        <div className="col-map">
-          <MapContainer
+      <div role="application">
+        {/* <Header /> */}
+        <main className="container" role="application">
+          <Sidebar
             deselectMarker={this.deselectMarker}
             mapCenter={mapCenter}
             mapZoom={mapZoom}
@@ -108,9 +96,23 @@ export default class App extends Component {
             placeList={placeList}
             placeSelected={placeSelected}
           />
-        </div>
-      </main>
-      // </div>
+          <div className="col-map">
+            <MapContainer
+              deselectMarker={this.deselectMarker}
+              mapCenter={mapCenter}
+              mapZoom={mapZoom}
+              markerInfoWindowShowing={markerInfoWindowShowing}
+              markerList={markerList}
+              markerRef={this.getMarkerRef}
+              markerSelected={markerSelected}
+              selectMarker={this.selectMarker}
+              placeDetails={placeDetails}
+              placeList={placeList}
+              placeSelected={placeSelected}
+            />
+          </div>
+        </main>
+      </div>
     );
   }
 }
