@@ -25,6 +25,7 @@ const Sidebar = props => {
 
   return (
     <aside className="sidebar">
+      <input type="text" placeholder="Filter" className="input-filter" />
       <ul>{listItems}</ul>
     </aside>
   );

@@ -1,17 +1,27 @@
 .sidebar
   background: #336666
   color: #eaefef
+  display: flex
+  flex-flow: column nowrap
   flex: 1
   max-height: 100vh
   overflow: auto
   z-index: 5
 
-  .place
+  .place, .input-filter
     border-bottom: .0625rem solid #5b8484
+    flex: 1
     font-family: Roboto Condensed
     font-weight: 300
     padding: .8rem
 
+.input-filter
+  border: 0
+  font-size: 1rem
+
+
+
+// Scrollbar
 ::-webkit-scrollbar
   height: .4rem
   width: .4rem
