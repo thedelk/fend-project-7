@@ -6,16 +6,16 @@ import theme from "../styles/theme";
 const MapContainer = props => {
   const {
     deselectMarker,
-    clickedMarker,
+    selectMarker,
     google,
     mapCenter,
     mapZoom,
     markerInfoWindowShowing,
-    markerList,
-    markerRef,
+    // markerList,
+    // markerRef,
     markerSelected,
-    placeList,
-    placeSelected
+    placeList
+    // placeSelected
   } = props;
 
   const markers = placeList.map(place => {
@@ -23,7 +23,7 @@ const MapContainer = props => {
       <Marker
         key={place.venue.id}
         name={place.name}
-        onClick={clickedMarker.bind(this)}
+        onClick={selectMarker.bind(this)}
         position={place.position}
       />
     );
@@ -32,11 +32,8 @@ const MapContainer = props => {
   return (
     <Map
       google={google}
-      onready={console.log("render map.js")}
       onClick={deselectMarker}
       style={{
-        // position: "relative",
-        // display: "inherit",
         height: "100%",
         width: "100%"
       }}
@@ -80,7 +77,6 @@ const MapContainer = props => {
     </Map>
   );
 };
-// }
 
 export default GoogleApiWrapper({
   apiKey: G_KEY

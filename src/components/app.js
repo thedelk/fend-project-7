@@ -26,35 +26,27 @@ export default class App extends Component {
   getPlaces = () => {
     getPlacesData()
       .then(response => {
+        // Store returned list of places in an array
         this.setState({
           placeList: response.response.groups[0].items
         });
 
-        let test = this.state.placeList.map(place => {
-          return {
-            ...place,
-            position: {
-              lat: place.venue.location.lat,
-              lng: place.venue.location.lng
-            }
-          };
-        });
-
+        // Loop through each place and give it a Position key
+        // so its respective InfoWindow knows where to mount
         this.setState({
-          placeList: test
+          placeList: this.state.placeList.map(place => {
+            return {
+              ...place,
+              position: {
+                lat: place.venue.location.lat,
+                lng: place.venue.location.lng
+              }
+            };
+          })
         });
       })
       .catch(error => alert(`Error: ${error}`));
   };
-
-  // clickedMap = () => {
-  //   this.setState({
-  //     markerInfoWindowShowing: false,
-  //     markerSelected: undefined,
-  //     placeDetails: {},
-  //     placeSelected: undefined
-  //   });
-  // };
 
   deselectMarker = () => {
     this.setState({
@@ -65,7 +57,7 @@ export default class App extends Component {
     });
   };
 
-  clickedMarker = (props, marker) => {
+  selectMarker = (props, marker) => {
     this.setState({
       markerInfoWindowShowing: true,
       markerSelected: marker,
@@ -73,12 +65,6 @@ export default class App extends Component {
       placeSelected: props
     });
   };
-
-  // clickedMarkerClose = () => {
-  //   this.setState({
-
-  //   })
-  // }
 
   render() {
     const {
@@ -105,7 +91,7 @@ export default class App extends Component {
               markerList={markerList}
               markerRef={this.getMarkerRef}
               markerSelected={markerSelected}
-              clickedMarker={this.clickedMarker}
+              selectMarker={this.selectMarker}
               placeDetails={placeDetails}
               placeList={placeList}
               placeSelected={placeSelected}
