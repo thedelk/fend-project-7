@@ -1,7 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Sidebar extends Component {
-  render() {
-    return <div className="sidebar" />;
-  }
-}
+const Sidebar = props => {
+  const {
+    deselectMarker,
+    selectMarker,
+    google,
+    mapCenter,
+    mapZoom,
+    markerInfoWindowShowing,
+    // markerList,
+    // markerRef,
+    markerSelected,
+    placeList
+    // placeSelected
+  } = props;
+
+  const listItems = placeList.map(place => {
+    return (
+      <li key={place.venue.id} name={place.name} className="place">
+        {place.venue.name}
+      </li>
+    );
+  });
+
+  return (
+    <aside className="sidebar">
+      <ul>{listItems}</ul>
+    </aside>
+  );
+};
+
+export default Sidebar;

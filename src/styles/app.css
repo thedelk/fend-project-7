@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400);
 *,
 *:before,
 *:after {
@@ -26,11 +27,6 @@ ol, li {
   position: relative;
 }
 
-.place {
-  border-bottom: 1px solid #d3d3d3;
-  padding: .8rem;
-}
-
 .col-map {
   -webkit-box-flex: 4;
       -ms-flex: 4;
@@ -46,5 +42,12 @@ ol, li {
           flex: 1;
   max-height: 100vh;
   overflow: auto;
+}
+
+.sidebar .place {
+  font-family: Roboto Condensed;
+  font-weight: 300;
+  border-bottom: 1px solid #5b8484;
+  padding: .8rem;
 }
 /*# sourceMappingURL=app.css.map */

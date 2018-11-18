@@ -79,26 +79,38 @@ export default class App extends Component {
     } = this.state;
 
     return (
-      <div role="application">
-        <main className="container">
-          <Sidebar />
-          <div className="col-map">
-            <MapContainer
-              deselectMarker={this.deselectMarker}
-              mapCenter={mapCenter}
-              mapZoom={mapZoom}
-              markerInfoWindowShowing={markerInfoWindowShowing}
-              markerList={markerList}
-              markerRef={this.getMarkerRef}
-              markerSelected={markerSelected}
-              selectMarker={this.selectMarker}
-              placeDetails={placeDetails}
-              placeList={placeList}
-              placeSelected={placeSelected}
-            />
-          </div>
-        </main>
-      </div>
+      // <div role="application">
+      <main className="container" role="application">
+        <Sidebar
+          deselectMarker={this.deselectMarker}
+          mapCenter={mapCenter}
+          mapZoom={mapZoom}
+          markerInfoWindowShowing={markerInfoWindowShowing}
+          markerList={markerList}
+          markerRef={this.getMarkerRef}
+          markerSelected={markerSelected}
+          selectMarker={this.selectMarker}
+          placeDetails={placeDetails}
+          placeList={placeList}
+          placeSelected={placeSelected}
+        />
+        <div className="col-map">
+          <MapContainer
+            deselectMarker={this.deselectMarker}
+            mapCenter={mapCenter}
+            mapZoom={mapZoom}
+            markerInfoWindowShowing={markerInfoWindowShowing}
+            markerList={markerList}
+            markerRef={this.getMarkerRef}
+            markerSelected={markerSelected}
+            selectMarker={this.selectMarker}
+            placeDetails={placeDetails}
+            placeList={placeList}
+            placeSelected={placeSelected}
+          />
+        </div>
+      </main>
+      // </div>
     );
   }
 }
