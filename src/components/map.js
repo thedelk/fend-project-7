@@ -6,6 +6,8 @@ import theme from "../styles/theme";
 const MapContainer = props => {
   const {
     deselectMarker,
+    filteredList,
+    filterTerm,
     selectMarker,
     google,
     mapCenter,
@@ -18,16 +20,21 @@ const MapContainer = props => {
     // placeSelected
   } = props;
 
-  const markers = placeList.map(place => {
-    return (
-      <Marker
-        key={place.venue.id}
-        name={place.name}
-        onClick={selectMarker.bind(this)}
-        position={place.position}
-      />
-    );
-  });
+  const markers = placeList
+    // .filter(
+    //   place =>
+    //     place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+    // )
+    .map(place => {
+      return (
+        <Marker
+          key={place.venue.id}
+          name={place.name}
+          onClick={selectMarker.bind(this)}
+          position={place.position}
+        />
+      );
+    });
 
   return (
     <Map

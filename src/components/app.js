@@ -3,10 +3,12 @@ import "../styles/app.css";
 import { getPlacesData } from "../util/requests";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
-import Header from "./header";
+// import Header from "./header";
 
 export default class App extends Component {
   state = {
+    filterTerm: "",
+    filteredList: [],
     mapCenter: {
       lat: 35.465076,
       lng: -97.507373
@@ -20,7 +22,7 @@ export default class App extends Component {
     placeSelected: undefined
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.getPlaces();
   }
 
@@ -49,6 +51,17 @@ export default class App extends Component {
       .catch(error => alert(`Error: ${error}`));
   };
 
+  filterList = filterTerm => {
+    this.setState({
+      filterTerm: filterTerm,
+      filteredList: this.state.placeList.filter(place => {
+        return (
+          place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+        );
+      })
+    });
+  };
+
   deselectMarker = () => {
     this.setState({
       markerInfoWindowShowing: false,
@@ -69,6 +82,8 @@ export default class App extends Component {
 
   render() {
     const {
+      filteredList,
+      filterTerm,
       mapCenter,
       mapZoom,
       markerInfoWindowShowing,
@@ -85,6 +100,9 @@ export default class App extends Component {
         <main className="container" role="application">
           <Sidebar
             deselectMarker={this.deselectMarker}
+            filteredList={filteredList}
+            filterList={this.filterList.bind(this)}
+            filterTerm={filterTerm}
             mapCenter={mapCenter}
             mapZoom={mapZoom}
             markerInfoWindowShowing={markerInfoWindowShowing}

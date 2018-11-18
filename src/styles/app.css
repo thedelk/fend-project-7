@@ -52,17 +52,20 @@ ol, li {
   z-index: 5;
 }
 
-.sidebar .place, .sidebar .input-filter {
+.sidebar .place {
   border-bottom: .0625rem solid #5b8484;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+}
+
+.sidebar .place, .sidebar .input-filter {
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
   font-family: Roboto Condensed;
   font-weight: 300;
   padding: .8rem;
 }
 
-.input-filter {
+.sidebar .input-filter {
   border: 0;
   font-size: 1rem;
 }
