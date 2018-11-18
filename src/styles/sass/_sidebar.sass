@@ -4,9 +4,42 @@
   flex: 1
   max-height: 100vh
   overflow: auto
+  z-index: 5
 
   .place
+    border-bottom: .0625rem solid #5b8484
     font-family: Roboto Condensed
     font-weight: 300
-    border-bottom: 1px solid #5b8484
     padding: .8rem
+
+::-webkit-scrollbar
+  height: .4rem
+  width: .4rem
+
+::-webkit-scrollbar-button
+  height: 0
+  width: 0
+
+::-webkit-scrollbar-thumb
+  background: #adc1c1
+  border: 0 none #ffffff
+
+::-webkit-scrollbar-thumb:hover
+  background: #adc1c1
+
+::-webkit-scrollbar-thumb:active
+  background: #adc1c1
+
+::-webkit-scrollbar-track
+  background: #336666
+  border: 0 none #ffffff
+
+::-webkit-scrollbar-track:hover
+  background: #336666
+
+::-webkit-scrollbar-track:active
+  background: #336666
+
+::-webkit-scrollbar-corner
+  background: transparent
+
