@@ -4,10 +4,9 @@ import { G_KEY } from "../util/auth.js";
 import theme from "../styles/theme";
 
 const MapContainer = props => {
-  console.log("in mapContainer");
-  console.log(props);
-
   const {
+    deselectMarker,
+    clickedMarker,
     google,
     mapCenter,
     mapZoom,
@@ -15,7 +14,6 @@ const MapContainer = props => {
     markerList,
     markerRef,
     markerSelected,
-    markerWasSelected,
     placeList,
     placeSelected
   } = props;
@@ -23,10 +21,9 @@ const MapContainer = props => {
   const markers = placeList.map(place => {
     return (
       <Marker
-        className="marker"
         key={place.venue.id}
         name={place.name}
-        onClick={props.markerWasSelected.bind(this)}
+        onClick={clickedMarker.bind(this)}
         position={place.position}
       />
     );
@@ -36,7 +33,7 @@ const MapContainer = props => {
     <Map
       google={google}
       onready={console.log("render map.js")}
-      // onClick={this.onMapClick}
+      onClick={deselectMarker}
       style={{
         // position: "relative",
         // display: "inherit",
@@ -48,7 +45,6 @@ const MapContainer = props => {
       styles={theme}
       disableDefaultUI={true}
     >
-      {console.log(props)}
       {markers}
       {/* {placeList.map(place => {
         console.log(this);
@@ -72,7 +68,11 @@ const MapContainer = props => {
           />
         );
       })} */}
-      <InfoWindow visible={markerInfoWindowShowing} marker={markerSelected}>
+      <InfoWindow
+        visible={markerInfoWindowShowing}
+        marker={markerSelected}
+        onClose={deselectMarker}
+      >
         <section>
           <div>Title</div>
         </section>

@@ -13,10 +13,10 @@ export default class App extends Component {
     mapZoom: 12,
     markerInfoWindowShowing: false,
     markerList: [],
-    markerSelected: {},
-    placeDetails: {},
+    markerSelected: undefined,
+    // placeDetails: {},
     placeList: [],
-    placeSelected: null
+    placeSelected: undefined
   };
 
   componentDidMount() {
@@ -47,14 +47,38 @@ export default class App extends Component {
       .catch(error => alert(`Error: ${error}`));
   };
 
-  markerWasSelected = (props, marker) => {
+  // clickedMap = () => {
+  //   this.setState({
+  //     markerInfoWindowShowing: false,
+  //     markerSelected: undefined,
+  //     placeDetails: {},
+  //     placeSelected: undefined
+  //   });
+  // };
+
+  deselectMarker = () => {
+    this.setState({
+      markerInfoWindowShowing: false,
+      markerSelected: undefined,
+      // placeDetails: {},
+      placeSelected: undefined
+    });
+  };
+
+  clickedMarker = (props, marker) => {
     this.setState({
       markerInfoWindowShowing: true,
       markerSelected: marker,
-      placeDetails: {},
+      // placeDetails: {},
       placeSelected: props
     });
   };
+
+  // clickedMarkerClose = () => {
+  //   this.setState({
+
+  //   })
+  // }
 
   render() {
     const {
@@ -74,13 +98,14 @@ export default class App extends Component {
           <Sidebar />
           <div className="col-map">
             <MapContainer
+              deselectMarker={this.deselectMarker}
               mapCenter={mapCenter}
               mapZoom={mapZoom}
               markerInfoWindowShowing={markerInfoWindowShowing}
               markerList={markerList}
               markerRef={this.getMarkerRef}
               markerSelected={markerSelected}
-              markerWasSelected={this.markerWasSelected}
+              clickedMarker={this.clickedMarker}
               placeDetails={placeDetails}
               placeList={placeList}
               placeSelected={placeSelected}
