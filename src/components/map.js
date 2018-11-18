@@ -10,12 +10,12 @@ const MapContainer = props => {
   const {
     google,
     mapCenter,
-    mapMarkerInfoWindowShowing,
-    mapMarkerList,
-    mapMarkerSelected,
     mapZoom,
-    markerWasSelected,
+    markerInfoWindowShowing,
+    markerList,
     markerRef,
+    markerSelected,
+    markerWasSelected,
     placeList,
     placeSelected
   } = props;
@@ -25,9 +25,9 @@ const MapContainer = props => {
       <Marker
         className="marker"
         key={place.venue.id}
-        position={place.position}
-        onClick={props.markerWasSelected.bind(this)}
         name={place.name}
+        onClick={props.markerWasSelected.bind(this)}
+        position={place.position}
       />
     );
   });
@@ -72,10 +72,7 @@ const MapContainer = props => {
           />
         );
       })} */}
-      <InfoWindow
-        visible={mapMarkerInfoWindowShowing}
-        marker={mapMarkerSelected}
-      >
+      <InfoWindow visible={markerInfoWindowShowing} marker={markerSelected}>
         <section>
           <div>Title</div>
         </section>

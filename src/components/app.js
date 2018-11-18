@@ -6,17 +6,17 @@ import Sidebar from "./sidebar";
 
 export default class App extends Component {
   state = {
-    placeSelected: null,
     mapCenter: {
       lat: 35.465076,
       lng: -97.507373
     },
     mapZoom: 12,
-    mapMarkerInfoWindowShowing: false,
-    mapMarkerList: [],
-    mapMarkerSelected: {},
+    markerInfoWindowShowing: false,
+    markerList: [],
+    markerSelected: {},
     placeDetails: {},
-    placeList: []
+    placeList: [],
+    placeSelected: null
   };
 
   componentDidMount() {
@@ -49,23 +49,20 @@ export default class App extends Component {
 
   markerWasSelected = (props, marker) => {
     this.setState({
+      markerInfoWindowShowing: true,
+      markerSelected: marker,
       placeDetails: {},
-      placeSelected: props,
-      mapMarkerSelected: marker,
-      mapMarkerInfoWindowShowing: true
+      placeSelected: props
     });
   };
 
   render() {
-    console.log("app render");
-    console.log(this);
-
     const {
       mapCenter,
-      mapMarkerInfoWindowShowing,
-      mapMarkerList,
-      mapMarkerSelected,
       mapZoom,
+      markerInfoWindowShowing,
+      markerList,
+      markerSelected,
       placeDetails,
       placeList,
       placeSelected
@@ -77,15 +74,15 @@ export default class App extends Component {
           <Sidebar />
           <div className="col-map">
             <MapContainer
-              mapMarkerList={mapMarkerList}
-              placeList={placeList}
-              markerWasSelected={this.markerWasSelected}
-              mapMarkerSelected={mapMarkerSelected}
-              mapZoom={mapZoom}
-              markerRef={this.getMarkerRef}
-              mapMarkerInfoWindowShowing={mapMarkerInfoWindowShowing}
-              placeDetails={placeDetails}
               mapCenter={mapCenter}
+              mapZoom={mapZoom}
+              markerInfoWindowShowing={markerInfoWindowShowing}
+              markerList={markerList}
+              markerRef={this.getMarkerRef}
+              markerSelected={markerSelected}
+              markerWasSelected={this.markerWasSelected}
+              placeDetails={placeDetails}
+              placeList={placeList}
               placeSelected={placeSelected}
             />
           </div>
