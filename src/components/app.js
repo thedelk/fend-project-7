@@ -22,7 +22,7 @@ export default class App extends Component {
     placeSelected: undefined
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.getPlaces();
   }
 
@@ -72,12 +72,18 @@ export default class App extends Component {
   };
 
   selectMarker = (props, marker) => {
-    this.setState({
-      markerInfoWindowShowing: true,
-      markerSelected: marker,
-      // placeDetails: {},
-      placeSelected: props
-    });
+    // If a marker is already selected, clicking it again will deselect it
+    if (this.state.markerSelected === marker) {
+      this.deselectMarker();
+    } else {
+      // Clicking a marker will show its information window
+      this.setState({
+        markerInfoWindowShowing: true,
+        markerSelected: marker,
+        // placeDetails: {},
+        placeSelected: props
+      });
+    }
   };
 
   render() {
