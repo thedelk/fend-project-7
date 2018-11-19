@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import "../styles/app.css";
+import { GoogleApiWrapper } from "google-maps-react";
 import { getPlacesData } from "../util/requests";
+import { G_KEY } from "../util/auth.js";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
 // import Header from "./header";
 
-export default class App extends Component {
+export class App extends Component {
   state = {
     filterTerm: "",
     filteredList: [],
@@ -51,6 +53,22 @@ export default class App extends Component {
       .catch(error => alert(`Error: ${error}`));
   };
 
+  // getMarkerRef = ref => {
+  //   if (ref !== null) {
+  //     this.setState(prevState => ({
+  //       markerList: [...prevState.markerList, ref]
+  //     }));
+  //   }
+  // };
+
+  getMarkers = marker => {
+    if (marker !== null) {
+      this.setState(prevState => ({
+        markerList: [...prevState.markerList, marker]
+      }));
+    }
+  };
+
   filterList = filterTerm => {
     this.setState({
       filterTerm: filterTerm,
@@ -86,10 +104,17 @@ export default class App extends Component {
     }
   };
 
+  selectListItem = listItem => {
+    let thisPlace = this.state.placeList.filter(
+      test => listItem === test.venue.id
+    );
+  };
+
   render() {
+    console.log(this);
     const {
-      filteredList,
       filterTerm,
+      filteredList,
       mapCenter,
       mapZoom,
       markerInfoWindowShowing,
@@ -106,33 +131,39 @@ export default class App extends Component {
         <main className="container" role="application">
           <Sidebar
             deselectMarker={this.deselectMarker}
-            filteredList={filteredList}
             filterList={this.filterList.bind(this)}
             filterTerm={filterTerm}
+            filteredList={filteredList}
+            getMarkers={this.getMarkers}
             mapCenter={mapCenter}
             mapZoom={mapZoom}
             markerInfoWindowShowing={markerInfoWindowShowing}
             markerList={markerList}
             markerRef={this.getMarkerRef}
             markerSelected={markerSelected}
-            selectMarker={this.selectMarker}
             placeDetails={placeDetails}
             placeList={placeList}
             placeSelected={placeSelected}
+            selectListItem={this.selectListItem}
+            selectMarker={this.selectMarker}
           />
           <div className="col-map">
             <MapContainer
               deselectMarker={this.deselectMarker}
+              filterList={this.filterList.bind(this)}
+              filterTerm={filterTerm}
+              filteredList={filteredList}
+              getMarkers={this.getMarkers}
               mapCenter={mapCenter}
               mapZoom={mapZoom}
               markerInfoWindowShowing={markerInfoWindowShowing}
               markerList={markerList}
-              markerRef={this.getMarkerRef}
+              // markerRef={this.getMarkerRef}
               markerSelected={markerSelected}
-              selectMarker={this.selectMarker}
               placeDetails={placeDetails}
               placeList={placeList}
               placeSelected={placeSelected}
+              selectMarker={this.selectMarker}
             />
           </div>
         </main>
@@ -140,3 +171,7 @@ export default class App extends Component {
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: G_KEY
+})(App);

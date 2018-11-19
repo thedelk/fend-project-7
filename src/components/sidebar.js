@@ -14,7 +14,8 @@ const Sidebar = props => {
     // markerList,
     // markerRef,
     markerSelected,
-    placeList
+    placeList,
+    selectListItem
     // placeSelected
   } = props;
 
@@ -25,7 +26,12 @@ const Sidebar = props => {
     )
     .map(place => {
       return (
-        <li key={place.venue.id} name={place.name} className="place">
+        <li
+          key={place.venue.id}
+          name={place.venue.name}
+          className="place"
+          onClick={selectListItem.bind(this, place.venue.id)}
+        >
           {place.venue.name}
         </li>
       );

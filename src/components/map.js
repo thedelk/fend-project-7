@@ -6,9 +6,9 @@ import theme from "../styles/theme";
 const MapContainer = props => {
   const {
     deselectMarker,
-    filteredList,
     filterTerm,
-    selectMarker,
+    // filteredList,
+    // getMarkers,
     google,
     mapCenter,
     mapZoom,
@@ -16,25 +16,30 @@ const MapContainer = props => {
     // markerList,
     // markerRef,
     markerSelected,
-    placeList
-    // placeSelected
+    placeList,
+    // placeSelected,
+    selectMarker
   } = props;
 
   const markers = placeList
-    // .filter(
-    //   place =>
-    //     place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
-    // )
+    .filter(
+      place =>
+        place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+    )
     .map(place => {
       return (
         <Marker
+          // getMarkers={this.getMarkers(place.venue.id)}
+          id={place.venue.id}
           key={place.venue.id}
-          name={place.name}
+          name={place.venue.name}
           onClick={selectMarker.bind(this)}
           position={place.position}
         />
       );
     });
+
+  console.log(props);
 
   return (
     <Map
@@ -73,9 +78,9 @@ const MapContainer = props => {
         );
       })} */}
       <InfoWindow
-        visible={markerInfoWindowShowing}
         marker={markerSelected}
         onClose={deselectMarker}
+        visible={markerInfoWindowShowing}
       >
         <section>
           <div>Title</div>
