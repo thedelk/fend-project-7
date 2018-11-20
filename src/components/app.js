@@ -12,6 +12,7 @@ export class App extends Component {
   // TODO: Store place details so marker infoWindows can access it to display
   // TODO: Make app accessible
   state = {
+    animateMarker: false,
     filterTerm: "",
     filteredList: [],
     mapCenter: {
@@ -58,8 +59,8 @@ export class App extends Component {
 
   // FIXME: Markers are re-added to markerList upon clearing a search
   getMarkers = marker => {
-    console.log(marker);
-    console.log(this.state);
+    // console.log(marker);
+    // console.log(this.state);
     if (marker !== null) {
       this.setState(prevState => ({
         markerList: [...prevState.markerList, marker]
@@ -81,7 +82,9 @@ export class App extends Component {
   };
 
   deselectMarker = () => {
+    console.log(this);
     this.setState({
+      animateMarker: false,
       markerInfoWindowShowing: false,
       markerSelected: undefined,
       // placeDetails: {},
@@ -90,18 +93,29 @@ export class App extends Component {
   };
 
   selectMarker = (props, marker) => {
+    console.log(props);
+    console.log(this.state);
+    console.log(marker);
+
     // If a marker is already selected, clicking it again will deselect it
     if (this.state.markerSelected === marker) {
       this.deselectMarker();
     } else {
+      this.markerAnimate(marker);
       // Clicking a marker will show its information window
       this.setState({
+        animateMarker: true,
         markerInfoWindowShowing: true,
         markerSelected: marker,
         // placeDetails: {},
         placeSelected: props
       });
     }
+  };
+
+  markerAnimate = marker => {
+    console.log(marker);
+    marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
   };
 
   selectListItem = listItem => {
@@ -113,6 +127,7 @@ export class App extends Component {
 
   render() {
     const {
+      animateMarker,
       filterTerm,
       filteredList,
       mapCenter,
@@ -149,6 +164,7 @@ export class App extends Component {
           />
           <div className="map">
             <MapContainer
+              animateMarker={animateMarker}
               deselectMarker={this.deselectMarker}
               filterList={this.filterList.bind(this)}
               filterTerm={filterTerm}

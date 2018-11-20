@@ -5,6 +5,7 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
+    animateMarker,
     deselectMarker,
     filterTerm,
     // filteredList,
@@ -29,6 +30,11 @@ const MapContainer = props => {
     .map(place => {
       return (
         <Marker
+          // animation={google.maps.Animation.DROP}
+          // animation={
+          //   animateMarker ? this.setAnimation(1) : this.setAnimation(2)
+          // }
+          // animation={google.maps.Animation.BOUNCE}
           id={place.venue.id}
           key={place.venue.id}
           name={place.venue.name}
