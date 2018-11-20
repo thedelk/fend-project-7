@@ -8,7 +8,7 @@ const MapContainer = props => {
     deselectMarker,
     filterTerm,
     // filteredList,
-    // getMarkers,
+    getMarkers,
     google,
     mapCenter,
     mapZoom,
@@ -30,6 +30,7 @@ const MapContainer = props => {
       return (
         <Marker
           // getMarkers={this.getMarkers(place.venue.id)}
+          ref={getMarkers}
           id={place.venue.id}
           key={place.venue.id}
           name={place.venue.name}

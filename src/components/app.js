@@ -62,6 +62,7 @@ export class App extends Component {
   // };
 
   getMarkers = marker => {
+    console.log(marker);
     if (marker !== null) {
       this.setState(prevState => ({
         markerList: [...prevState.markerList, marker]
@@ -105,6 +106,7 @@ export class App extends Component {
   };
 
   selectListItem = listItem => {
+    console.log(listItem);
     let thisPlace = this.state.placeList.filter(
       test => listItem === test.venue.id
     );
@@ -158,7 +160,7 @@ export class App extends Component {
               mapZoom={mapZoom}
               markerInfoWindowShowing={markerInfoWindowShowing}
               markerList={markerList}
-              // markerRef={this.getMarkerRef}
+              markerRef={this.getMarkerRef}
               markerSelected={markerSelected}
               placeDetails={placeDetails}
               placeList={placeList}
