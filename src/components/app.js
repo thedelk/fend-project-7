@@ -139,7 +139,7 @@ export class App extends Component {
             selectListItem={this.selectListItem}
             selectMarker={this.selectMarker}
           />
-          <div className="col-map">
+          <div className="map">
             <MapContainer
               deselectMarker={this.deselectMarker}
               filterList={this.filterList.bind(this)}
