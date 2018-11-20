@@ -53,16 +53,7 @@ export class App extends Component {
       .catch(error => alert(`Error: ${error}`));
   };
 
-  // getMarkerRef = ref => {
-  //   if (ref !== null) {
-  //     this.setState(prevState => ({
-  //       markerList: [...prevState.markerList, ref]
-  //     }));
-  //   }
-  // };
-
   getMarkers = marker => {
-    console.log(marker);
     if (marker !== null) {
       this.setState(prevState => ({
         markerList: [...prevState.markerList, marker]
@@ -106,14 +97,13 @@ export class App extends Component {
   };
 
   selectListItem = listItem => {
-    console.log(listItem);
-    let thisPlace = this.state.placeList.filter(
-      test => listItem === test.venue.id
+    let thisMarker = this.state.markerList.find(
+      marker => listItem.venue.id === marker.props.id
     );
+    this.selectMarker(thisMarker.props, thisMarker.marker);
   };
 
   render() {
-    console.log(this);
     const {
       filterTerm,
       filteredList,

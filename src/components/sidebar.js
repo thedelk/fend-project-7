@@ -30,7 +30,7 @@ const Sidebar = props => {
           key={place.venue.id}
           name={place.venue.name}
           className="place"
-          onClick={selectListItem.bind(this, place.venue.id)}
+          onClick={selectListItem.bind(this, place)}
         >
           {place.venue.name}
         </li>

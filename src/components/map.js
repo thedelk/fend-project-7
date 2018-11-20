@@ -40,8 +40,6 @@ const MapContainer = props => {
       );
     });
 
-  console.log(props);
-
   return (
     <Map
       google={google}
