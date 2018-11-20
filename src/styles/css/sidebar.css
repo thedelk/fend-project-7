@@ -1,62 +1,27 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400);
-*,
-*:before,
-*:after {
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-ol, li {
-  list-style: none;
-}
-
-.container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  min-height: 100vh;
-  position: relative;
-}
-
-.col-map {
-  -webkit-box-flex: 4;
-      -ms-flex: 4;
-          flex: 4;
-  position: relative;
-}
-
 .sidebar {
-  background: #336666;
+  background: #366;
   color: #eaefef;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   max-height: 100vh;
   overflow: auto;
   z-index: 5;
 }
 
 .sidebar .place {
-  border-bottom: .0625rem solid #5b8484;
+  border-bottom: 0.0625rem solid #5b8484;
 }
 
-.sidebar .place, .sidebar .input-filter {
+.sidebar .place,
+.sidebar .input-filter {
   -webkit-box-flex: 0;
       -ms-flex: 0;
           flex: 0;
@@ -68,6 +33,19 @@ ol, li {
 .sidebar .input-filter {
   border: 0;
   font-size: 1rem;
+}
+
+li:hover {
+  background-color: #285151;
+  cursor: pointer;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+li:active {
+  background-color: #1e3d3d;
+  -webkit-transition: .15s;
+  transition: .15s;
 }
 
 ::-webkit-scrollbar {
@@ -109,4 +87,4 @@ ol, li {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=sidebar.css.map */

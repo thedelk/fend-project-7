@@ -1,7 +1,7 @@
 import React from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
-import theme from "../styles/theme";
+import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {

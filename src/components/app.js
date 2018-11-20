@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styles/app.css";
+import "../styles/css/layout.css";
 import { GoogleApiWrapper } from "google-maps-react";
 import { getPlacesData } from "../util/requests";
 import { G_KEY } from "../util/auth.js";

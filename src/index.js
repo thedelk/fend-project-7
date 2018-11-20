@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./styles/index.css";
+import "./styles/css/index.css";
+// import "./styles/app.css";
 import App from "./components/app";
 // import WrappedComponent from "./components/app";
 import * as serviceWorker from "./util/serviceWorker";

@@ -1,18 +1,24 @@
+$gray: #eaefef
+$teal-light: #5b8484
+$teal-primary: #366
+$teal-darker: #285151
+$teal-darkest: #1e3d3d
+
 .sidebar
-  // align-items: flex-start
-  background: #336666
-  color: #eaefef
+  background: $teal-primary
+  color: $gray
   display: flex
-  flex-flow: column nowrap
   flex: 1
+  flex-flow: column nowrap
   max-height: 100vh
   overflow: auto
   z-index: 5
 
   .place
-    border-bottom: .0625rem solid #5b8484
+    border-bottom: .0625rem solid $teal-light
 
-  .place, .input-filter
+  .place,
+  .input-filter
     flex: 0
     font-family: Roboto Condensed
     font-weight: 300
@@ -21,6 +27,15 @@
   .input-filter
     border: 0
     font-size: 1rem
+
+li:hover
+  background-color: $teal-darker
+  cursor: pointer
+  transition: .25s
+
+li:active
+  background-color: $teal-darkest
+  transition: .15s
 
 
 
