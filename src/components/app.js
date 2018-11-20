@@ -8,6 +8,9 @@ import Sidebar from "./sidebar";
 // import Header from "./header";
 
 export class App extends Component {
+  // TODO: Configure active marker animation
+  // TODO: Store place details so marker infoWindows can access it to display
+  // TODO: Make app accessible
   state = {
     filterTerm: "",
     filteredList: [],
@@ -53,7 +56,10 @@ export class App extends Component {
       .catch(error => alert(`Error: ${error}`));
   };
 
+  // FIXME: Markers are re-added to markerList upon clearing a search
   getMarkers = marker => {
+    console.log(marker);
+    console.log(this.state);
     if (marker !== null) {
       this.setState(prevState => ({
         markerList: [...prevState.markerList, marker]
@@ -61,6 +67,8 @@ export class App extends Component {
     }
   };
 
+  // FIXME: If a marker is selected, filtering out the result from the list
+  // does not remove the marker's associated infoWindow
   filterList = filterTerm => {
     this.setState({
       filterTerm: filterTerm,
@@ -150,7 +158,6 @@ export class App extends Component {
               mapZoom={mapZoom}
               markerInfoWindowShowing={markerInfoWindowShowing}
               markerList={markerList}
-              markerRef={this.getMarkerRef}
               markerSelected={markerSelected}
               placeDetails={placeDetails}
               placeList={placeList}

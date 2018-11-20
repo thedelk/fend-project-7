@@ -17,7 +17,7 @@ const MapContainer = props => {
     // markerRef,
     markerSelected,
     placeList,
-    // placeSelected,
+    placeSelected,
     selectMarker
   } = props;
 
@@ -29,61 +29,45 @@ const MapContainer = props => {
     .map(place => {
       return (
         <Marker
-          // getMarkers={this.getMarkers(place.venue.id)}
-          ref={getMarkers}
           id={place.venue.id}
           key={place.venue.id}
           name={place.venue.name}
           onClick={selectMarker.bind(this)}
           position={place.position}
+          ref={getMarkers}
         />
       );
     });
 
+  const infoWindowContent = placeSelected ? (
+    <div>
+      <h3>{placeSelected.name}</h3>
+      <p>{placeSelected.id}</p>
+    </div>
+  ) : (
+    ""
+  );
+
   return (
     <Map
+      disableDefaultUI={true}
       google={google}
+      initialCenter={mapCenter}
       onClick={deselectMarker}
       style={{
         height: "100%",
         width: "100%"
       }}
-      zoom={mapZoom}
-      initialCenter={mapCenter}
       styles={theme}
-      disableDefaultUI={true}
+      zoom={mapZoom}
     >
       {markers}
-      {/* {placeList.map(place => {
-        console.log(this);
-        return (
-          <Marker
-            className="marker"
-            // key={place.venue.id}
-            key={place.name}
-            // id={place.venue.id}
-            onClick={markerWasSelected.bind(this)}
-            // onClick={console.log("refresh?")}
-            name={place.name}
-            // position={{
-            //   lat: place.venue.location.lat,
-            //   lng: place.venue.location.lng
-            // }}
-            position={{
-              lat: place.position.lat,
-              lng: place.position.lng
-            }}
-          />
-        );
-      })} */}
       <InfoWindow
         marker={markerSelected}
         onClose={deselectMarker}
         visible={markerInfoWindowShowing}
       >
-        <section>
-          <div>Title</div>
-        </section>
+        <section>{infoWindowContent}</section>
       </InfoWindow>
     </Map>
   );
