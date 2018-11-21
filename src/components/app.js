@@ -12,7 +12,6 @@ export class App extends Component {
   // TODO: Store place details so marker infoWindows can access it to display
   // TODO: Make app accessible
   state = {
-    animateMarker: false,
     filterTerm: "",
     filteredList: [],
     mapCenter: {
@@ -32,6 +31,7 @@ export class App extends Component {
     this.getPlaces();
   }
 
+  // TODO: Move data fetch into a higher-order component
   getPlaces = () => {
     getPlacesData()
       .then(response => {
@@ -68,8 +68,9 @@ export class App extends Component {
     }
   };
 
-  // FIXME: If a marker is selected, filtering out the result from the list
-  // does not remove the marker's associated infoWindow
+  // FIXME: If a marker is selected and its info window is showing,
+  // filtering out the result from the list does not remove the
+  // marker's associated info window
   filterList = filterTerm => {
     this.setState({
       filterTerm: filterTerm,
@@ -81,11 +82,15 @@ export class App extends Component {
     });
   };
 
-  deselectMarker = () => {
-    console.log(this);
+  deselectMarker = marker => {
+    //
+    // Temporary
+    const animatingMarkers = this.state.markerList;
+    animatingMarkers.forEach(m => m.marker.setAnimation(null));
+
     this.setState({
-      animateMarker: false,
       markerInfoWindowShowing: false,
+      // markerList: animatingMarkers,
       markerSelected: undefined,
       // placeDetails: {},
       placeSelected: undefined
@@ -93,18 +98,26 @@ export class App extends Component {
   };
 
   selectMarker = (props, marker) => {
-    console.log(props);
-    console.log(this.state);
-    console.log(marker);
+    //
+    // Temporary
+    const bouncingMarkers = this.state.markerList;
+    bouncingMarkers.forEach(staticMarker => {
+      if (staticMarker.marker.id === marker.id) {
+        staticMarker.marker.setAnimation(1);
+      } else {
+        staticMarker.marker.setAnimation(null);
+      }
+    });
+    this.setState({
+      markerList: bouncingMarkers
+    });
 
     // If a marker is already selected, clicking it again will deselect it
     if (this.state.markerSelected === marker) {
-      this.deselectMarker();
+      this.deselectMarker(marker);
     } else {
-      this.markerAnimate(marker);
       // Clicking a marker will show its information window
       this.setState({
-        animateMarker: true,
         markerInfoWindowShowing: true,
         markerSelected: marker,
         // placeDetails: {},
@@ -113,21 +126,50 @@ export class App extends Component {
     }
   };
 
-  markerAnimate = marker => {
-    console.log(marker);
-    marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
-  };
+  // handleMarkerAnimation = marker => {
+  //   console.log(marker);
+  //   const bouncingMarkers = this.state.markerList;
+  //   console.log(bouncingMarkers);
+  //   console.log(this);
 
+  //   if (this.state.markerSelected) {
+  //     bouncingMarkers.forEach(staticMarker => {
+  //       if (staticMarker.marker.id === marker.id) {
+  //         staticMarker.marker.setAnimation(1);
+  //       } else {
+  //         staticMarker.marker.setAnimation(null);
+  //       }
+  //     });
+  //     this.setState({
+  //       markerList: bouncingMarkers
+  //     });
+  //   } else {
+  //     bouncingMarkers.forEach(bouncingMarker =>
+  //       bouncingMarker.marker.setAnimation(null)
+  //     );
+  //     this.setState({
+  //       markerList: bouncingMarkers
+  //     });
+  //   }
+  // };
+
+  // FIXME: Associated marker bounces only on the second click of its
+  // list item (so, on "deselect")
   selectListItem = listItem => {
+    // In the list of markers, find the one that has the same ID
+    // as the place that was selected in the list
     let thisMarker = this.state.markerList.find(
       marker => listItem.venue.id === marker.props.id
     );
+
+    // Now that the appropriate marker has been identified,
+    // handle the functions associated with selecting a marker
+    // (e.g. showing its info window, making it bounce)
     this.selectMarker(thisMarker.props, thisMarker.marker);
   };
 
   render() {
     const {
-      animateMarker,
       filterTerm,
       filteredList,
       mapCenter,
@@ -164,7 +206,6 @@ export class App extends Component {
           />
           <div className="map">
             <MapContainer
-              animateMarker={animateMarker}
               deselectMarker={this.deselectMarker}
               filterList={this.filterList.bind(this)}
               filterTerm={filterTerm}

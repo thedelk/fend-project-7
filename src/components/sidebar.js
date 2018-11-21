@@ -3,18 +3,8 @@ import "../styles/css/sidebar.css";
 
 const Sidebar = props => {
   const {
-    deselectMarker,
-    filteredList,
     filterList,
     filterTerm,
-    selectMarker,
-    google,
-    mapCenter,
-    mapZoom,
-    markerInfoWindowShowing,
-    // markerList,
-    // markerRef,
-    markerSelected,
     placeList,
     selectListItem
     // placeSelected
@@ -28,9 +18,9 @@ const Sidebar = props => {
     .map(place => {
       return (
         <li
+          className="place"
           key={place.venue.id}
           name={place.venue.name}
-          className="place"
           onClick={selectListItem.bind(this, place)}
         >
           {place.venue.name}

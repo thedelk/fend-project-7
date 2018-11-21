@@ -5,17 +5,13 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
-    animateMarker,
     deselectMarker,
     filterTerm,
-    // filteredList,
     getMarkers,
     google,
     mapCenter,
     mapZoom,
     markerInfoWindowShowing,
-    // markerList,
-    // markerRef,
     markerSelected,
     placeList,
     placeSelected,
@@ -30,11 +26,7 @@ const MapContainer = props => {
     .map(place => {
       return (
         <Marker
-          // animation={google.maps.Animation.DROP}
-          // animation={
-          //   animateMarker ? this.setAnimation(1) : this.setAnimation(2)
-          // }
-          // animation={google.maps.Animation.BOUNCE}
+          animation={google.maps.Animation.DROP}
           id={place.venue.id}
           key={place.venue.id}
           name={place.venue.name}
@@ -59,7 +51,7 @@ const MapContainer = props => {
       disableDefaultUI={true}
       google={google}
       initialCenter={mapCenter}
-      onClick={deselectMarker}
+      onClick={deselectMarker.bind(this)}
       style={{
         height: "100%",
         width: "100%"
