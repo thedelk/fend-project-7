@@ -126,33 +126,6 @@ export class App extends Component {
     }
   };
 
-  // handleMarkerAnimation = marker => {
-  //   console.log(marker);
-  //   const bouncingMarkers = this.state.markerList;
-  //   console.log(bouncingMarkers);
-  //   console.log(this);
-
-  //   if (this.state.markerSelected) {
-  //     bouncingMarkers.forEach(staticMarker => {
-  //       if (staticMarker.marker.id === marker.id) {
-  //         staticMarker.marker.setAnimation(1);
-  //       } else {
-  //         staticMarker.marker.setAnimation(null);
-  //       }
-  //     });
-  //     this.setState({
-  //       markerList: bouncingMarkers
-  //     });
-  //   } else {
-  //     bouncingMarkers.forEach(bouncingMarker =>
-  //       bouncingMarker.marker.setAnimation(null)
-  //     );
-  //     this.setState({
-  //       markerList: bouncingMarkers
-  //     });
-  //   }
-  // };
-
   // FIXME: Associated marker bounces only on the second click of its
   // list item (so, on "deselect")
   selectListItem = listItem => {
