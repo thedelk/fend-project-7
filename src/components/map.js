@@ -5,53 +5,52 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
-    deselectMarker,
-    filterTerm,
-    getMarkers,
+    // deselectMarker,
+    // filterTerm,
+    // getMarkers,
     google,
     mapCenter,
-    mapZoom,
-    markerInfoWindowShowing,
-    markerSelected,
+    // markerInfoWindowShowing,
+    // markerSelected,
     placeList,
-    placeSelected,
-    selectMarker
+    // placeSelected,
+    // selectMarker
+    mapZoom
   } = props;
 
   const markers = placeList
-    .filter(
-      place =>
-        place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
-    )
+    //   .filter(
+    //     place =>
+    //       place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+    //   )
     .map(place => {
       return (
         <Marker
-          animation={google.maps.Animation.DROP}
-          id={place.venue.id}
-          key={place.venue.id}
-          name={place.venue.name}
-          onClick={selectMarker.bind(this)}
+          //         animation={google.maps.Animation.DROP}
+          key={place.id}
+          name={place.name}
+          //         onClick={selectMarker.bind(this)}
           position={place.position}
-          ref={getMarkers}
+          //         ref={getMarkers}
         />
       );
     });
 
-  const infoWindowContent = placeSelected ? (
-    <div>
-      <h3>{placeSelected.name}</h3>
-      <p>{placeSelected.id}</p>
-    </div>
-  ) : (
-    ""
-  );
+  // const infoWindowContent = placeSelected ? (
+  //   <div>
+  //     <h3>{placeSelected.name}</h3>
+  //     <p>{placeSelected.id}</p>
+  //   </div>
+  // ) : (
+  //   ""
+  // );
 
   return (
     <Map
       disableDefaultUI={true}
       google={google}
       initialCenter={mapCenter}
-      onClick={deselectMarker.bind(this)}
+      // onClick={deselectMarker.bind(this)}
       style={{
         height: "100%",
         width: "100%"
@@ -60,13 +59,14 @@ const MapContainer = props => {
       zoom={mapZoom}
     >
       {markers}
-      <InfoWindow
+      {/* <InfoWindow
         marker={markerSelected}
         onClose={deselectMarker}
         visible={markerInfoWindowShowing}
       >
+      <section>Placeholder</section>
         <section>{infoWindowContent}</section>
-      </InfoWindow>
+      </InfoWindow> */}
     </Map>
   );
 };
