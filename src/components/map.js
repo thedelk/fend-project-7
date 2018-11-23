@@ -6,7 +6,7 @@ import theme from "../styles/map-theme";
 const MapContainer = props => {
   const {
     // deselectMarker,
-    // filterTerm,
+    filterTerm,
     // getMarkers,
     google,
     mapCenter,
@@ -19,10 +19,9 @@ const MapContainer = props => {
   } = props;
 
   const markers = placeList
-    //   .filter(
-    //     place =>
-    //       place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
-    //   )
+    .filter(
+      place => place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+    )
     .map(place => {
       return (
         <Marker

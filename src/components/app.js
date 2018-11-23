@@ -158,7 +158,7 @@ export default class App extends Component {
               <MapContainer
                 // deselectMarker={this.deselectMarker}
                 // filterList={this.filterList.bind(this)}
-                // filterTerm={filterTerm}
+                filterTerm={filterTerm}
                 // filteredList={filteredList}
                 // getMarkers={this.getMarkers}
                 mapCenter={mapCenter}
