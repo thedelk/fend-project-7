@@ -40,10 +40,8 @@ export default class App extends Component {
   filterList = filterTerm => {
     this.setState({
       filterTerm: filterTerm,
-      filteredList: this.state.placeList.filter(place => {
-        return (
-          place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
-        );
+      filteredList: this.props.placeList.filter(place => {
+        return place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0;
       })
     });
   };
@@ -113,13 +111,12 @@ export default class App extends Component {
     console.log("render app");
 
     const {
-      //   filterTerm,
-      //   filteredList,
+      filterTerm,
+      filteredList,
       //   markerInfoWindowShowing,
       //   markerList,
       //   markerSelected,
       //   placeDetails,
-      // placeList,
       //   placeSelected
       mapCenter,
       mapZoom
@@ -141,8 +138,8 @@ export default class App extends Component {
           <main className="container" role="application">
             <Sidebar
               // deselectMarker={this.deselectMarker}
-              // filterList={this.filterList.bind(this)}
-              // filterTerm={filterTerm}
+              filterList={this.filterList.bind(this)}
+              filterTerm={filterTerm}
               // filteredList={filteredList}
               // getMarkers={this.getMarkers}
               // mapCenter={mapCenter}

@@ -11,10 +11,9 @@ const Sidebar = props => {
   } = props;
 
   const listItems = placeList
-    // .filter(
-    //   place =>
-    //     place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
-    // )
+    .filter(
+      place => place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+    )
     .map(place => {
       return (
         <li
@@ -33,8 +32,8 @@ const Sidebar = props => {
         type="text"
         placeholder="Filter"
         className="input-filter"
-        // value={filterTerm}
-        // onChange={event => filterList(event.target.value)}
+        value={filterTerm}
+        onChange={event => filterList(event.target.value)}
       />
       <ul>{listItems}</ul>
     </aside>
