@@ -63,10 +63,11 @@ const MapContainer = props => {
         marker={markerSelected}
         onClose={deselectMarker}
         visible={markerInfoWindowShowing}
-      >
-      <section>Placeholder</section>
+        >
+        <section>Placeholder</section>
         <section>{infoWindowContent}</section>
       </InfoWindow> */}
+      {console.log("map render")}
     </Map>
   );
 };

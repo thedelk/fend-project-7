@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "../styles/css/layout.css";
-import { GoogleApiWrapper } from "google-maps-react";
+// import { GoogleApiWrapper } from "google-maps-react";
 // import { getPlacesData } from "../util/requests";
 import Requests from "../util/requests";
 // import { FS_URL } from "../util/auth";
-import { G_KEY } from "../util/auth.js";
+// import { G_KEY } from "../util/auth.js";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
 // import Header from "./header";
@@ -16,7 +16,8 @@ const LOCATION = "Oklahoma City";
 const VERSION = "20182507";
 const FS_URL_FULL = FS_URL.concat(`${QUERY}&near=${LOCATION}&v=${VERSION}`);
 
-export class App extends Component {
+// export class App extends Component {
+export default class App extends Component {
   // TODO: Configure active marker animation
   // TODO: Store place details so marker infoWindows can access it to display
   // TODO: Make app accessible
@@ -182,8 +183,10 @@ export class App extends Component {
   };
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
+    // console.log(this.state);
+    // console.log(this.props);
+    console.log("render app");
+
     const {
       //   filterTerm,
       //   filteredList,
@@ -199,52 +202,61 @@ export class App extends Component {
 
     const { placeList } = this.props;
 
-    return (
-      <div role="application">
-        {/* <Header /> */}
-        <main className="container" role="application">
-          <Sidebar
-          // deselectMarker={this.deselectMarker}
-          // filterList={this.filterList.bind(this)}
-          // filterTerm={filterTerm}
-          // filteredList={filteredList}
-          // getMarkers={this.getMarkers}
-          // mapCenter={mapCenter}
-          // mapZoom={mapZoom}
-          // markerInfoWindowShowing={markerInfoWindowShowing}
-          // markerList={markerList}
-          // markerRef={this.getMarkerRef}
-          // markerSelected={markerSelected}
-          // placeDetails={placeDetails}
-          // placeList={placeList}
-          // placeSelected={placeSelected}
-          // selectListItem={this.selectListItem}
-          // selectMarker={this.selectMarker}
-          />
-          <div className="map">
-            <MapContainer
-              // deselectMarker={this.deselectMarker}
-              // filterList={this.filterList.bind(this)}
-              // filterTerm={filterTerm}
-              // filteredList={filteredList}
-              // getMarkers={this.getMarkers}
-              mapCenter={mapCenter}
-              mapZoom={mapZoom}
-              // markerInfoWindowShowing={markerInfoWindowShowing}
-              // markerList={markerList}
-              // markerSelected={markerSelected}
-              // placeDetails={placeDetails}
-              placeList={this.props.placeList}
-              // placeSelected={placeSelected}
-              // selectMarker={this.selectMarker}
+    if (!placeList) {
+      return (
+        <div>
+          <h1>Loading</h1>
+          <p>Fetching map data...</p>
+        </div>
+      );
+    } else {
+      return (
+        <div role="application">
+          {/* <Header /> */}
+          <main className="container" role="application">
+            <Sidebar
+            // deselectMarker={this.deselectMarker}
+            // filterList={this.filterList.bind(this)}
+            // filterTerm={filterTerm}
+            // filteredList={filteredList}
+            // getMarkers={this.getMarkers}
+            // mapCenter={mapCenter}
+            // mapZoom={mapZoom}
+            // markerInfoWindowShowing={markerInfoWindowShowing}
+            // markerList={markerList}
+            // markerRef={this.getMarkerRef}
+            // markerSelected={markerSelected}
+            // placeDetails={placeDetails}
+            // placeList={placeList}
+            // placeSelected={placeSelected}
+            // selectListItem={this.selectListItem}
+            // selectMarker={this.selectMarker}
             />
-          </div>
-        </main>
-      </div>
-    );
+            <div className="map">
+              <MapContainer
+                // deselectMarker={this.deselectMarker}
+                // filterList={this.filterList.bind(this)}
+                // filterTerm={filterTerm}
+                // filteredList={filteredList}
+                // getMarkers={this.getMarkers}
+                mapCenter={mapCenter}
+                mapZoom={mapZoom}
+                // markerInfoWindowShowing={markerInfoWindowShowing}
+                // markerList={markerList}
+                // markerSelected={markerSelected}
+                // placeDetails={placeDetails}
+                placeList={placeList}
+                // placeSelected={placeSelected}
+                // selectMarker={this.selectMarker}
+              />
+            </div>
+          </main>
+        </div>
+      );
+    }
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: G_KEY
-})(App);
+// export default GoogleApiWrapper({
+//   apiKey: G_KEY
+// })(App);

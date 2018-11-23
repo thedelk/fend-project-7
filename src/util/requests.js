@@ -52,7 +52,7 @@ class Helper {
       })
       .catch(error => {
         console.log(
-          "Error is in fetching response from FOURSQUARE in getResponse() in FourSquare.js"
+          "Error fetching response from FOURSQUARE in getResponse() [requests.js]"
         );
         console.log(error);
         return error;
