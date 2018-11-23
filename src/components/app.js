@@ -1,22 +1,9 @@
 import React, { Component } from "react";
 import "../styles/css/layout.css";
-// import { GoogleApiWrapper } from "google-maps-react";
-// import { getPlacesData } from "../util/requests";
-import Requests from "../util/requests";
-// import { FS_URL } from "../util/auth";
-// import { G_KEY } from "../util/auth.js";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
 // import Header from "./header";
-import axios from "axios";
 
-const FS_URL = "https://api.foursquare.com/v2/venues/explore?";
-const QUERY = "coffee";
-const LOCATION = "Oklahoma City";
-const VERSION = "20182507";
-const FS_URL_FULL = FS_URL.concat(`${QUERY}&near=${LOCATION}&v=${VERSION}`);
-
-// export class App extends Component {
 export default class App extends Component {
   // TODO: Configure active marker animation
   // TODO: Store place details so marker infoWindows can access it to display
@@ -33,70 +20,8 @@ export default class App extends Component {
     markerList: [],
     markerSelected: undefined,
     // placeDetails: {},
-    // placeList: [],
     placeSelected: undefined
   };
-
-  // componentDidMount() {
-  //   Requests.searchVenues()
-  //     .then(results => {
-  //       console.log(results);
-  //       const { venues } = results.response;
-  //       this.setState({
-  //         placeList: venues.map(place => {
-  //           return {
-  //             ...place,
-  //             position: {
-  //               lat: place.location.lat,
-  //               lng: place.location.lng
-  //             }
-  //           };
-  //         })
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(
-  //         "Error setting initial state in componentDidMount() [app.js]"
-  //       );
-  //       console.log(error);
-  //     });
-  // }
-
-  // getPlacesInfo = () => {
-  //   getPlaces()
-  //     .then(response => {
-  //       console.log(response);
-  //     })
-  //     .catch(error => {
-  //       console.log(`Error: ${error}`);
-  //     });
-  // };
-
-  // TODO: Move data fetch into a higher-order component
-  // getPlaces = () => {
-  //   getPlacesData()
-  //     .then(response => {
-  //       // Store returned list of places in an array
-  //       this.setState({
-  //         placeList: response.response.groups[0].items
-  //       });
-
-  //       // Loop through each place and give it a Position key
-  //       // so its respective InfoWindow knows where to mount
-  //       this.setState({
-  //         placeList: this.state.placeList.map(place => {
-  //           return {
-  //             ...place,
-  //             position: {
-  //               lat: place.venue.location.lat,
-  //               lng: place.venue.location.lng
-  //             }
-  //           };
-  //         })
-  //       });
-  //     })
-  //     .catch(error => alert(`Error: ${error}`));
-  // };
 
   // FIXME: Markers are re-added to markerList upon clearing a search
   getMarkers = marker => {
@@ -256,7 +181,3 @@ export default class App extends Component {
     }
   }
 }
-
-// export default GoogleApiWrapper({
-//   apiKey: G_KEY
-// })(App);
