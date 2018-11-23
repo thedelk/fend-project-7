@@ -10,24 +10,22 @@ const Sidebar = props => {
     // placeSelected
   } = props;
 
-  // const listItems = placeList
-  //   .filter(
-  //     place =>
-  //       place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
-  //   )
-  //   .map(place => {
-  //     return (
-  //       <li
-  //       className="place"
-  //       key={place.venue.id}
-  //       name={place.venue.name}
-  //       onClick={selectListItem.bind(this, place)}
-  //       >
-  //         Test.
-  //         {place.venue.name}
-  //       </li>
-  //     );
-  //   });
+  const listItems = placeList
+    // .filter(
+    //   place =>
+    //     place.venue.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+    // )
+    .map(place => {
+      return (
+        <li
+          className="place"
+          key={place.id}
+          // onClick={selectListItem.bind(this, place)}
+        >
+          {place.name}
+        </li>
+      );
+    });
 
   return (
     <aside className="sidebar">
@@ -38,10 +36,7 @@ const Sidebar = props => {
         // value={filterTerm}
         // onChange={event => filterList(event.target.value)}
       />
-      <ul>
-        <li>temp</li>
-      </ul>
-      {/* <ul>{listItems}</ul> */}
+      <ul>{listItems}</ul>
     </aside>
   );
 };

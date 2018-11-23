@@ -37,9 +37,9 @@ export class Main extends Component {
           "Error setting initial state in componentDidMount() [app.js]"
         );
         console.log(error);
-        alert(
-          "Error fetching data. Please check your internet connection, or try again later."
-        );
+        // alert(
+        //   "Error fetching data. Please check your internet connection, or try again later."
+        // );
       });
   }
 

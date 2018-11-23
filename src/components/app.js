@@ -140,22 +140,22 @@ export default class App extends Component {
           {/* <Header /> */}
           <main className="container" role="application">
             <Sidebar
-            // deselectMarker={this.deselectMarker}
-            // filterList={this.filterList.bind(this)}
-            // filterTerm={filterTerm}
-            // filteredList={filteredList}
-            // getMarkers={this.getMarkers}
-            // mapCenter={mapCenter}
-            // mapZoom={mapZoom}
-            // markerInfoWindowShowing={markerInfoWindowShowing}
-            // markerList={markerList}
-            // markerRef={this.getMarkerRef}
-            // markerSelected={markerSelected}
-            // placeDetails={placeDetails}
-            // placeList={placeList}
-            // placeSelected={placeSelected}
-            // selectListItem={this.selectListItem}
-            // selectMarker={this.selectMarker}
+              // deselectMarker={this.deselectMarker}
+              // filterList={this.filterList.bind(this)}
+              // filterTerm={filterTerm}
+              // filteredList={filteredList}
+              // getMarkers={this.getMarkers}
+              // mapCenter={mapCenter}
+              // mapZoom={mapZoom}
+              // markerInfoWindowShowing={markerInfoWindowShowing}
+              // markerList={markerList}
+              // markerRef={this.getMarkerRef}
+              // markerSelected={markerSelected}
+              // placeDetails={placeDetails}
+              placeList={placeList}
+              // placeSelected={placeSelected}
+              // selectListItem={this.selectListItem}
+              // selectMarker={this.selectMarker}
             />
             <div className="map">
               <MapContainer
