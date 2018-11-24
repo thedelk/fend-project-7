@@ -23,11 +23,18 @@ export default class App extends Component {
     placeSelected: undefined
   };
 
-  // FIXME: Markers are re-added to markerList upon clearing a search
+  activateMarker = (props, marker) => {
+    this.setState({
+      markerInfoWindowShowing: true,
+      markerSelected: marker,
+      placeSelected: props
+    });
+  };
+
   getMarkers = marker => {
-    // console.log(marker);
-    // console.log(this.state);
-    if (marker !== null) {
+    // Add the markers to the state array only once, otherwise typing in the filter
+    // and clearing it will add extra copies of the markers to the array
+    if (this.state.markerList.length === 0) {
       this.setState(prevState => ({
         markerList: [...prevState.markerList, marker]
       }));
@@ -112,12 +119,12 @@ export default class App extends Component {
 
     const {
       filterTerm,
-      filteredList,
-      //   markerInfoWindowShowing,
+      // filteredList,
+      markerInfoWindowShowing,
       //   markerList,
       //   markerSelected,
       //   placeDetails,
-      //   placeSelected
+      placeSelected,
       mapCenter,
       mapZoom
     } = this.state;
@@ -160,15 +167,15 @@ export default class App extends Component {
                 // filterList={this.filterList.bind(this)}
                 filterTerm={filterTerm}
                 // filteredList={filteredList}
-                // getMarkers={this.getMarkers}
+                getMarkers={this.getMarkers}
                 mapCenter={mapCenter}
                 mapZoom={mapZoom}
-                // markerInfoWindowShowing={markerInfoWindowShowing}
+                markerInfoWindowShowing={markerInfoWindowShowing}
                 // markerList={markerList}
                 // markerSelected={markerSelected}
                 // placeDetails={placeDetails}
                 placeList={placeList}
-                // placeSelected={placeSelected}
+                placeSelected={placeSelected}
                 // selectMarker={this.selectMarker}
               />
             </div>

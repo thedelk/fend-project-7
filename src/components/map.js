@@ -7,13 +7,13 @@ const MapContainer = props => {
   const {
     // deselectMarker,
     filterTerm,
-    // getMarkers,
+    getMarkers,
     google,
     mapCenter,
-    // markerInfoWindowShowing,
+    markerInfoWindowShowing,
     // markerSelected,
     placeList,
-    // placeSelected,
+    placeSelected,
     // selectMarker
     mapZoom
   } = props;
@@ -26,23 +26,25 @@ const MapContainer = props => {
       return (
         <Marker
           //         animation={google.maps.Animation.DROP}
+          id={place.id}
           key={place.id}
           name={place.name}
           //         onClick={selectMarker.bind(this)}
           position={place.position}
-          //         ref={getMarkers}
+          // ref={getMarkers}
+          ref={getMarkers}
         />
       );
     });
 
-  // const infoWindowContent = placeSelected ? (
-  //   <div>
-  //     <h3>{placeSelected.name}</h3>
-  //     <p>{placeSelected.id}</p>
-  //   </div>
-  // ) : (
-  //   ""
-  // );
+  const infoWindowContent = placeSelected ? (
+    <div>
+      <h3>{placeSelected.name}</h3>
+      <p>{placeSelected.id}</p>
+    </div>
+  ) : (
+    ""
+  );
 
   return (
     <Map
@@ -58,14 +60,13 @@ const MapContainer = props => {
       zoom={mapZoom}
     >
       {markers}
-      {/* <InfoWindow
-        marker={markerSelected}
-        onClose={deselectMarker}
+      <InfoWindow
+        // marker={markerSelected}
+        // onClose={deselectMarker}
         visible={markerInfoWindowShowing}
-        >
-        <section>Placeholder</section>
+      >
         <section>{infoWindowContent}</section>
-      </InfoWindow> */}
+      </InfoWindow>
       {console.log("map render")}
     </Map>
   );
