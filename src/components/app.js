@@ -23,12 +23,58 @@ export default class App extends Component {
     placeSelected: undefined
   };
 
-  activateMarker = (props, marker) => {
+  handleMarkerAnimation = () => {
+    // Logic to handle turning on/off marker animation upon selection
+  };
+
+  markerActivate = (props, marker) => {
     this.setState({
       markerInfoWindowShowing: true,
       markerSelected: marker,
       placeSelected: props
     });
+  };
+
+  markerDeactivate = () => {
+    this.setState({
+      markerInfoWindowShowing: false,
+      markerSelected: undefined,
+      placeSelected: undefined
+    });
+  };
+
+  onClickMarker = (props, marker) => {
+    console.log(this.state);
+    console.log(marker);
+
+    if (this.state.markerSelected === marker) {
+      this.deselectMarker(marker);
+    } else {
+      this.markerActivate(props, marker);
+    }
+  };
+
+  // onClickListItem = listItem => {
+  onClickListItem = (props, listItem) => {
+    // In the list of markers, find the one that has the same ID
+    // as the place that was selected in the list
+    // let thisMarker = this.state.markerList.find(
+    //   marker => listItem.id === marker.props.id
+    // );
+
+    console.log(this.state);
+    console.log(listItem);
+    console.log(props);
+    // console.log(thisMarker.marker);
+
+    // if (this.state.markerSelected === thisMarker.marker) {
+    //   this.deselectMarker(thisMarker.marker);
+    // } else {
+    //   this.markerActivate(thisMarker.props, thisMarker.marker);
+    // }
+    // Now that the appropriate marker has been identified,
+    // handle the functions associated with selecting a marker
+    // (e.g. showing its info window, making it bounce)
   };
 
   storeMarkers = marker => {
@@ -53,22 +99,34 @@ export default class App extends Component {
     });
   };
 
-  deselectMarker = marker => {
-    //
-    // Temporary
-    const animatingMarkers = this.state.markerList;
-    animatingMarkers.forEach(m => m.marker.setAnimation(null));
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // Old
+  // deselectMarker = marker => {
+  //   //
+  //   // Temporary
+  //   // const animatingMarkers = this.state.markerList;
+  //   // animatingMarkers.forEach(m => m.marker.setAnimation(null));
 
-    this.setState({
-      markerInfoWindowShowing: false,
-      // markerList: animatingMarkers,
-      markerSelected: undefined,
-      // placeDetails: {},
-      placeSelected: undefined
-    });
-  };
+  //   this.setState({
+  //     markerInfoWindowShowing: false,
+  //     // markerList: animatingMarkers,
+  //     markerSelected: undefined,
+  //     // placeDetails: {},
+  //     placeSelected: undefined
+  //   });
+  // };
 
   selectMarker = (props, marker) => {
+    console.log(marker);
     //
     // Temporary
     // const bouncingMarkers = this.state.markerList;
@@ -115,13 +173,14 @@ export default class App extends Component {
   render() {
     // console.log(this.state);
     // console.log(this.props);
-    console.log("render app");
+    // console.log("render app");
+    // console.log(this);
 
     const {
       filterTerm,
       // filteredList,
       markerInfoWindowShowing,
-      //   markerList,
+      markerList,
       markerSelected,
       //   placeDetails,
       placeSelected,
@@ -152,9 +211,10 @@ export default class App extends Component {
               // mapCenter={mapCenter}
               // mapZoom={mapZoom}
               // markerInfoWindowShowing={markerInfoWindowShowing}
-              // markerList={markerList}
+              markerList={markerList}
               // markerRef={this.getMarkerRef}
               // markerSelected={markerSelected}
+              onClickListItem={this.onClickListItem}
               // placeDetails={placeDetails}
               placeList={placeList}
               // placeSelected={placeSelected}
@@ -163,20 +223,23 @@ export default class App extends Component {
             />
             <div className="map">
               <MapContainer
-                deselectMarker={this.deselectMarker}
+                // deselectMarker={this.deselectMarker}
                 // filterList={this.filterList.bind(this)}
                 filterTerm={filterTerm}
                 // filteredList={filteredList}
                 storeMarkers={this.storeMarkers}
                 mapCenter={mapCenter}
                 mapZoom={mapZoom}
+                markerActivate={this.markerActivate}
+                markerDeactivate={this.markerDeactivate}
                 markerInfoWindowShowing={markerInfoWindowShowing}
                 // markerList={markerList}
                 markerSelected={markerSelected}
+                onClickMarker={this.onClickMarker}
                 // placeDetails={placeDetails}
                 placeList={placeList}
                 placeSelected={placeSelected}
-                selectMarker={this.selectMarker}
+                // selectMarker={this.selectMarker}
               />
             </div>
           </main>
