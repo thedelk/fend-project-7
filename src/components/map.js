@@ -45,6 +45,7 @@ const MapContainer = props => {
   // selected, which would result in an error.
   const infoWindowContent = placeSelected ? (
     <div>
+      {console.log(placeSelected)}
       <h3>{placeSelected.name}</h3>
       <p>{placeSelected.id}</p>
     </div>

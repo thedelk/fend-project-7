@@ -42,7 +42,7 @@ const Sidebar = props => {
           onChange={event => filterList(event.target.value)}
         />
         <ul>{listItems}</ul>
-        <ul>{console.log("sidebar render")}</ul>
+        {/* <ul>{console.log("sidebar render")}</ul> */}
       </aside>
     );
   } else {

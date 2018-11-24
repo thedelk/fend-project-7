@@ -44,6 +44,9 @@ export default class App extends Component {
   };
 
   onClickMarker = (props, marker) => {
+    console.log(marker);
+    console.log(props);
+
     // What to do when a marker is clicked.
     if (this.state.markerSelected === marker) {
       // Clicking the already active marker will deactivate it.
