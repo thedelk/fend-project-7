@@ -44,42 +44,39 @@ export default class App extends Component {
   };
 
   onClickMarker = (props, marker) => {
-    console.log(this.state);
-    console.log(marker);
-
+    // What to do when a marker is clicked.
     if (this.state.markerSelected === marker) {
-      this.deselectMarker(marker);
+      // Clicking the already active marker will deactivate it.
+      this.markerDeactivate(marker);
     } else {
+      // Otherwise, select this place and activate its marker.
       this.markerActivate(props, marker);
     }
   };
 
-  // onClickListItem = listItem => {
-  onClickListItem = (props, listItem) => {
+  // FIXME: Associated marker bounces only on the second click of its
+  // list item (so, on "deselect")
+  onClickListItem = listItem => {
     // In the list of markers, find the one that has the same ID
-    // as the place that was selected in the list
-    // let thisMarker = this.state.markerList.find(
-    //   marker => listItem.id === marker.props.id
-    // );
+    // as the place that was selected in the list.
+    let thisMarker = this.state.markerList.find(
+      marker => listItem.id === marker.props.id
+    );
 
-    console.log(this.state);
-    console.log(listItem);
-    console.log(props);
-    // console.log(thisMarker.marker);
-
-    // if (this.state.markerSelected === thisMarker.marker) {
-    //   this.deselectMarker(thisMarker.marker);
-    // } else {
-    //   this.markerActivate(thisMarker.props, thisMarker.marker);
-    // }
-    // Now that the appropriate marker has been identified,
+    // Now that the associated marker has been found,
     // handle the functions associated with selecting a marker
-    // (e.g. showing its info window, making it bounce)
+    // (e.g. showing its info window, making it bounce).
+    if (this.state.markerSelected === thisMarker.marker) {
+      this.markerDeactivate(thisMarker.marker);
+    } else {
+      this.markerActivate(thisMarker.props, thisMarker.marker);
+    }
   };
 
   storeMarkers = marker => {
-    // Add the markers to the state array only once, otherwise typing in the filter
-    // and clearing it will add extra copies of the markers to the array
+    // Add the markers to the state array only if the array is empty (meaning
+    // this hasn't been done yet). Without the conditional, using the filter
+    // and then clearing it will add extra copies of the markers to the array.
     if (this.state.markerList.length === 0) {
       this.setState(prevState => ({
         markerList: [...prevState.markerList, marker]
@@ -99,83 +96,7 @@ export default class App extends Component {
     });
   };
 
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  // Old
-  // deselectMarker = marker => {
-  //   //
-  //   // Temporary
-  //   // const animatingMarkers = this.state.markerList;
-  //   // animatingMarkers.forEach(m => m.marker.setAnimation(null));
-
-  //   this.setState({
-  //     markerInfoWindowShowing: false,
-  //     // markerList: animatingMarkers,
-  //     markerSelected: undefined,
-  //     // placeDetails: {},
-  //     placeSelected: undefined
-  //   });
-  // };
-
-  selectMarker = (props, marker) => {
-    console.log(marker);
-    //
-    // Temporary
-    // const bouncingMarkers = this.state.markerList;
-    // bouncingMarkers.forEach(staticMarker => {
-    //   if (staticMarker.marker.id === marker.id) {
-    //     staticMarker.marker.setAnimation(1);
-    //   } else {
-    //     staticMarker.marker.setAnimation(null);
-    //   }
-    // });
-    // this.setState({
-    //   markerList: bouncingMarkers
-    // });
-
-    // If a marker is already selected, clicking it again will deselect it
-    if (this.state.markerSelected === marker) {
-      this.deselectMarker(marker);
-    } else {
-      // Clicking a marker will show its information window
-      this.setState({
-        markerInfoWindowShowing: true,
-        markerSelected: marker,
-        // placeDetails: {},
-        placeSelected: props
-      });
-    }
-  };
-
-  // FIXME: Associated marker bounces only on the second click of its
-  // list item (so, on "deselect")
-  selectListItem = listItem => {
-    // In the list of markers, find the one that has the same ID
-    // as the place that was selected in the list
-    let thisMarker = this.state.markerList.find(
-      marker => listItem.id === marker.props.id
-    );
-
-    // Now that the appropriate marker has been identified,
-    // handle the functions associated with selecting a marker
-    // (e.g. showing its info window, making it bounce)
-    this.selectMarker(thisMarker.props, thisMarker.marker);
-  };
-
   render() {
-    // console.log(this.state);
-    // console.log(this.props);
-    // console.log("render app");
-    // console.log(this);
-
     const {
       filterTerm,
       // filteredList,
@@ -218,7 +139,7 @@ export default class App extends Component {
               // placeDetails={placeDetails}
               placeList={placeList}
               // placeSelected={placeSelected}
-              selectListItem={this.selectListItem}
+              // selectListItem={this.selectListItem}
               // selectMarker={this.selectMarker}
             />
             <div className="map">

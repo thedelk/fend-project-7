@@ -17,7 +17,6 @@ const MapContainer = props => {
     onClickMarker,
     placeList,
     placeSelected,
-    // selectMarker,
     mapZoom
   } = props;
 
@@ -40,6 +39,10 @@ const MapContainer = props => {
       );
     });
 
+  // If a place has been selected, the info window will show that place's information;
+  // otherwise set the info window content to an empty string.
+  // This is to prevent trying to retrieve this information when a place hasn't been
+  // selected, which would result in an error.
   const infoWindowContent = placeSelected ? (
     <div>
       <h3>{placeSelected.name}</h3>
@@ -71,7 +74,6 @@ const MapContainer = props => {
         <section>{infoWindowContent}</section>
       </InfoWindow>
       {console.log("map render")}
-      {/* {console.log(props)} */}
     </Map>
   );
 };
