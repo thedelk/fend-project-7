@@ -103,7 +103,7 @@ export default class App extends Component {
     // In the list of markers, find the one that has the same ID
     // as the place that was selected in the list
     let thisMarker = this.state.markerList.find(
-      marker => listItem.venue.id === marker.props.id
+      marker => listItem.id === marker.props.id
     );
 
     // Now that the appropriate marker has been identified,
@@ -158,7 +158,7 @@ export default class App extends Component {
               // placeDetails={placeDetails}
               placeList={placeList}
               // placeSelected={placeSelected}
-              // selectListItem={this.selectListItem}
+              selectListItem={this.selectListItem}
               // selectMarker={this.selectMarker}
             />
             <div className="map">

@@ -19,7 +19,7 @@ const Sidebar = props => {
         <li
           className="place"
           key={place.id}
-          // onClick={selectListItem.bind(this, place)}
+          onClick={selectListItem.bind(this, place)}
         >
           {place.name}
         </li>
