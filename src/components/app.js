@@ -31,7 +31,7 @@ export default class App extends Component {
     });
   };
 
-  getMarkers = marker => {
+  storeMarkers = marker => {
     // Add the markers to the state array only once, otherwise typing in the filter
     // and clearing it will add extra copies of the markers to the array
     if (this.state.markerList.length === 0) {
@@ -71,17 +71,17 @@ export default class App extends Component {
   selectMarker = (props, marker) => {
     //
     // Temporary
-    const bouncingMarkers = this.state.markerList;
-    bouncingMarkers.forEach(staticMarker => {
-      if (staticMarker.marker.id === marker.id) {
-        staticMarker.marker.setAnimation(1);
-      } else {
-        staticMarker.marker.setAnimation(null);
-      }
-    });
-    this.setState({
-      markerList: bouncingMarkers
-    });
+    // const bouncingMarkers = this.state.markerList;
+    // bouncingMarkers.forEach(staticMarker => {
+    //   if (staticMarker.marker.id === marker.id) {
+    //     staticMarker.marker.setAnimation(1);
+    //   } else {
+    //     staticMarker.marker.setAnimation(null);
+    //   }
+    // });
+    // this.setState({
+    //   markerList: bouncingMarkers
+    // });
 
     // If a marker is already selected, clicking it again will deselect it
     if (this.state.markerSelected === marker) {
@@ -122,7 +122,7 @@ export default class App extends Component {
       // filteredList,
       markerInfoWindowShowing,
       //   markerList,
-      //   markerSelected,
+      markerSelected,
       //   placeDetails,
       placeSelected,
       mapCenter,
@@ -163,20 +163,20 @@ export default class App extends Component {
             />
             <div className="map">
               <MapContainer
-                // deselectMarker={this.deselectMarker}
+                deselectMarker={this.deselectMarker}
                 // filterList={this.filterList.bind(this)}
                 filterTerm={filterTerm}
                 // filteredList={filteredList}
-                getMarkers={this.getMarkers}
+                storeMarkers={this.storeMarkers}
                 mapCenter={mapCenter}
                 mapZoom={mapZoom}
                 markerInfoWindowShowing={markerInfoWindowShowing}
                 // markerList={markerList}
-                // markerSelected={markerSelected}
+                markerSelected={markerSelected}
                 // placeDetails={placeDetails}
                 placeList={placeList}
                 placeSelected={placeSelected}
-                // selectMarker={this.selectMarker}
+                selectMarker={this.selectMarker}
               />
             </div>
           </main>

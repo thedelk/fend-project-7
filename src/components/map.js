@@ -5,16 +5,16 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
-    // deselectMarker,
+    deselectMarker,
     filterTerm,
-    getMarkers,
+    storeMarkers,
     google,
     mapCenter,
     markerInfoWindowShowing,
-    // markerSelected,
+    markerSelected,
     placeList,
     placeSelected,
-    // selectMarker
+    selectMarker,
     mapZoom
   } = props;
 
@@ -29,10 +29,9 @@ const MapContainer = props => {
           id={place.id}
           key={place.id}
           name={place.name}
-          //         onClick={selectMarker.bind(this)}
+          onClick={selectMarker.bind(this)}
           position={place.position}
-          // ref={getMarkers}
-          ref={getMarkers}
+          ref={storeMarkers}
         />
       );
     });
@@ -51,7 +50,7 @@ const MapContainer = props => {
       disableDefaultUI={true}
       google={google}
       initialCenter={mapCenter}
-      // onClick={deselectMarker.bind(this)}
+      onClick={deselectMarker.bind(this)}
       style={{
         height: "100%",
         width: "100%"
@@ -61,8 +60,8 @@ const MapContainer = props => {
     >
       {markers}
       <InfoWindow
-        // marker={markerSelected}
-        // onClose={deselectMarker}
+        marker={markerSelected}
+        onClose={deselectMarker}
         visible={markerInfoWindowShowing}
       >
         <section>{infoWindowContent}</section>
