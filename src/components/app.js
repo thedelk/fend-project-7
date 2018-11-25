@@ -36,14 +36,11 @@ export class App extends Component {
   };
 
   onClickPlace = (props, marker) => {
-    // What to do when a marker is clicked.
-    if (this.state.placeSelected === marker) {
-      // Clicking the already active marker will deactivate it.
-      this.markerDeactivate(marker);
-    } else {
-      // Otherwise, select this place and activate its marker.
-      this.markerActivate(props, marker);
-    }
+    // Clicking the already active place will deactivate it.
+    // Otherwise, select this place and activate its marker.
+    this.state.placeSelected === marker
+      ? this.markerDeactivate(marker)
+      : this.markerActivate(props, marker);
   };
 
   // FIXME: If a marker is selected and its info window is showing,
