@@ -14,6 +14,7 @@ const MapContainer = props => {
     onClickPlace,
     places,
     placeSelected,
+    placeSelectedDetails,
     mapZoom
   } = props;
 
@@ -35,14 +36,47 @@ const MapContainer = props => {
       );
     });
 
+  function getInfo(detail) {
+    console.log(detail);
+
+    let place = detail.location;
+    let placeName = detail.name;
+    let placeAddress = place.address ? place.address : "(No address listed)";
+    // let placeAddress = place.address;
+    let placeCity = place.city ? place.city : "(No city listed)";
+    let placeState = place.state ? place.state : "(No state listed)";
+    let placePostalCode = place.postalCode ? place.postalCode : "";
+
+    // let placeName = placeSelectedDetails.location.name;
+    // console.log(props.placeSelectedDetails.location.name);
+    // let placeAddress = place.address;
+    // let placeCity = place.city;
+
+    return (
+      <div>
+        <h3>{placeName}</h3>
+        <p>{placeAddress}</p>
+        <p>
+          {placeCity}, {placeState} {placePostalCode}
+        </p>
+      </div>
+    );
+  }
+
   // If a place has been selected, the info window will show that place's information;
   // otherwise set the info window content to an empty string.
   // This is to prevent trying to retrieve this information when a place hasn't been
   // selected, which would result in an error.
-  const infoWindowContent = placeSelected ? (
-    <div>
-      <h3>{placeSelected.name}</h3>
-      <p>{placeSelected.id}</p>
+  const infoWindowContent = placeSelectedDetails ? (
+    <div className="info-window">
+      <h3>{placeSelectedDetails.name}</h3>
+      <p>{placeSelectedDetails.location.address}</p>
+      <p>
+        {`${placeSelectedDetails.location.city}, ${
+          placeSelectedDetails.location.state
+        } ${placeSelectedDetails.location.postalCode}`}
+      </p>
+      <p>{placeSelectedDetails.location.country}</p>
     </div>
   ) : (
     ""
@@ -67,7 +101,10 @@ const MapContainer = props => {
         onClose={markerDeactivate}
         visible={markerInfoWindowShowing}
       >
-        <section>{infoWindowContent}</section>
+        <section>
+          {placeSelectedDetails ? getInfo(placeSelectedDetails) : undefined}
+        </section>
+        {/* <section>{infoWindowContent}</section> */}
       </InfoWindow>
     </Map>
   );

@@ -14,7 +14,8 @@ export class App extends Component {
     filterTerm: "",
     filteredList: [],
     markerInfoWindowShowing: false,
-    placeSelected: undefined
+    placeSelected: undefined,
+    placeSelectedDetails: undefined
   };
 
   handleMarkerAnimation = () => {
@@ -22,9 +23,12 @@ export class App extends Component {
   };
 
   markerActivate = (props, marker) => {
+    console.log(props);
+    console.log(marker);
     this.setState({
       markerInfoWindowShowing: true,
-      placeSelected: marker
+      placeSelected: marker,
+      placeSelectedDetails: props
     });
   };
 
@@ -36,11 +40,16 @@ export class App extends Component {
   };
 
   onClickPlace = (props, marker) => {
+    // Search the "places" props for the Foursquare venue that has
+    // the same id as the marker/list item selected
+    console.log(props);
+    let details = this.props.places.find(place => props.id === place.id);
+
     // Clicking the already active place will deactivate it.
     // Otherwise, select this place and activate its marker.
     this.state.placeSelected === marker
       ? this.markerDeactivate(marker)
-      : this.markerActivate(props, marker);
+      : this.markerActivate(details, marker);
   };
 
   // FIXME: If a marker is selected and its info window is showing,
@@ -73,13 +82,10 @@ export class App extends Component {
             {markers.length > 0 ? (
               <div className="sidebar">
                 <Sidebar
-                  deselectMarker={this.deselectMarker}
                   filterList={this.filterList.bind(this)}
                   filterTerm={this.state.filterTerm}
                   markers={markers}
-                  onClickListItem={this.onClickListItem}
                   onClickPlace={this.onClickPlace}
-                  placeSelected={this.state.placeSelected}
                   places={places}
                 />
               </div>
@@ -99,6 +105,7 @@ export class App extends Component {
                 markers={markers}
                 onClickPlace={this.onClickPlace}
                 placeSelected={this.state.placeSelected}
+                placeSelectedDetails={this.state.placeSelectedDetails}
                 places={places}
                 storeMarkers={storeMarkers}
               />

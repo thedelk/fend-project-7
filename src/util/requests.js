@@ -48,6 +48,7 @@ class Helper {
     return await axios
       .get(ENDPOINT + new URLSearchParams(PARAMS))
       .then(response => {
+        console.log(response);
         return response.data;
       })
       .catch(error => {
