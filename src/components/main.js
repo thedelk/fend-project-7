@@ -1,7 +1,13 @@
+// @Author:             Ryan Delk
+// @Date:               2018-11-25 14:05:53
+// @Last Modified by:   Ryan Delk
+// @Last Modified time: 2018-11-25 14:05:53
+
 import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
-import Requests from "../util/requests";
+import Request from "../util/requests";
+import RequestCopy from "../util/requestsCopy";
 import App from "./app";
 
 export class Main extends Component {
@@ -21,19 +27,18 @@ export class Main extends Component {
   };
 
   componentDidMount() {
-    Requests.searchVenues()
+    RequestCopy.getPlaces()
       .then(results => {
-        const places = results.response.venues.map(place => {
-          return {
-            ...place,
-            position: {
-              lat: place.location.lat,
-              lng: place.location.lng
-            }
-          };
-        });
         this.setState({
-          places: places
+          places: results.response.venues.map(place => {
+            return {
+              ...place,
+              position: {
+                lat: place.location.lat,
+                lng: place.location.lng
+              }
+            };
+          })
         });
       })
       .catch(error => {
@@ -48,6 +53,10 @@ export class Main extends Component {
         //   "Error fetching data. Please check your internet connection, or try again later."
         // );
       });
+
+    // RequestCopy.getPlacesData("4fc4db63e4b0d9d21ed8cae2").then(response => {
+    //   console.log(response);
+    // });
   }
 
   storeMarkers = marker => {
@@ -74,6 +83,18 @@ export class Main extends Component {
     } else {
       // When the data is ready, render App and pass the places down as props
       return <App storeMarkers={this.storeMarkers} {...this.state} />;
+      // return (
+      //   <div>
+      //     <h1>Done!</h1>
+      //     {this.state.places.map(place => (
+      //       <div key={place.id}>
+      //         <h2>{place.name}</h2>
+      //         <p>{place.id}</p>
+      //         <p />
+      //       </div>
+      //     ))}
+      //   </div>
+      // );
     }
   }
 }

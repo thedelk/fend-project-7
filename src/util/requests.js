@@ -1,4 +1,8 @@
-import { FS_URL } from "../util/auth";
+// @Author:             Ryan Delk
+// @Date:               2018-11-25 14:12:36
+// @Last Modified by:   Ryan Delk
+// @Last Modified time: 2018-11-25 14:12:36
+
 import axios from "axios";
 
 const QUERY = "coffee";

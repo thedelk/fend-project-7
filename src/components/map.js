@@ -1,3 +1,8 @@
+// @Author:             Ryan Delk
+// @Date:               2018-11-25 14:08:56
+// @Last Modified by:   Ryan Delk
+// @Last Modified time: 2018-11-25 14:08:56
+
 import React from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";

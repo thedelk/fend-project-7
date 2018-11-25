@@ -20,12 +20,13 @@ $color-white: #fff
   overflow: auto
 
   .place
-    border-bottom: .0625rem solid $color-teal-lighter
+    border-bottom: .1rem solid $color-teal-lighter
 
   .place,
   .input-filter
     flex: 0
-    padding: .8rem
+    font-size: 1.6rem
+    padding: 1.4rem
 
 
 
@@ -33,7 +34,6 @@ $color-white: #fff
 input
   background-color: $color-teal-lightest
   border: hidden
-  font-size: 1rem
   width: 100%
 
   &::placeholder
@@ -46,23 +46,23 @@ input
 
 // Transitions
 li
-  transition: .4s
+  transition: .4s ease
 
   &:hover
     background-color: $color-teal-darker
     cursor: pointer
-    transition: .3s ease
+    transition: .1s ease
 
   &:active
     background-color: $color-teal-darkest
-    transition: .4s ease
+    transition: .2s ease
 
 
 
 // Scrollbar
 ::-webkit-scrollbar
-  height: .4rem
-  width: .4rem
+  height: .6rem
+  width: .6rem
 
 ::-webkit-scrollbar-button
   height: 0

@@ -2,8 +2,8 @@
 *,
 *::before,
 *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
@@ -13,19 +13,50 @@ body {
   height: 100%;
 }
 
-ol,
-li {
-  list-style: none;
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto Condensed', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
+  font-size: 1.6em;
   font-weight: 300;
+  letter-spacing: .01em;
+  line-height: 1.6;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+ol,
+li {
+  list-style: none;
+}
+
+p {
+  font-size: 1.4rem;
+  margin-top: .6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #5b8484;
+  letter-spacing: normal;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: .8rem;
 }
 /*# sourceMappingURL=index.css.map */

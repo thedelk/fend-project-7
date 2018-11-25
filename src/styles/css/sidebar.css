@@ -13,7 +13,7 @@
 }
 
 .sidebar .place {
-  border-bottom: 0.0625rem solid #5b8484;
+  border-bottom: 0.1rem solid #5b8484;
 }
 
 .sidebar .place,
@@ -21,13 +21,13 @@
   -webkit-box-flex: 0;
       -ms-flex: 0;
           flex: 0;
-  padding: .8rem;
+  font-size: 1.6rem;
+  padding: 1.4rem;
 }
 
 input {
   background-color: #fafbfb;
   border: hidden;
-  font-size: 1rem;
   width: 100%;
 }
 
@@ -64,26 +64,26 @@ input:focus::placeholder {
 }
 
 li {
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .4s ease;
+  transition: .4s ease;
 }
 
 li:hover {
   background-color: #285151;
   cursor: pointer;
-  -webkit-transition: .3s ease;
-  transition: .3s ease;
+  -webkit-transition: .1s ease;
+  transition: .1s ease;
 }
 
 li:active {
   background-color: #1e3d3d;
-  -webkit-transition: .4s ease;
-  transition: .4s ease;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
 }
 
 ::-webkit-scrollbar {
-  height: .4rem;
-  width: .4rem;
+  height: .6rem;
+  width: .6rem;
 }
 
 ::-webkit-scrollbar-button {

@@ -1,3 +1,8 @@
+// @Author:             Ryan Delk
+// @Date:               2018-11-25 14:08:50
+// @Last Modified by:   Ryan Delk
+// @Last Modified time: 2018-11-25 14:08:50
+
 import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
