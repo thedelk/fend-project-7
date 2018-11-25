@@ -8,6 +8,8 @@ export class Main extends Component {
   // TODO: Implement static placeholder data if the data fetch fails
   state = {
     placeList: [],
+    places: [],
+    markers: [],
     // TODO: Change render to include an "else if" that changes the return
     // HTML to let the user know there was an issue (maybe remove the alert)
     // in the request's error catch
@@ -17,16 +19,19 @@ export class Main extends Component {
   componentDidMount() {
     Requests.searchVenues()
       .then(results => {
+        const places = results.response.venues.map(place => {
+          return {
+            ...place,
+            position: {
+              lat: place.location.lat,
+              lng: place.location.lng
+            }
+          };
+        });
         this.setState({
-          placeList: results.response.venues.map(place => {
-            return {
-              ...place,
-              position: {
-                lat: place.location.lat,
-                lng: place.location.lng
-              }
-            };
-          })
+          placeList: places,
+          places: places
+          // markers: places
         });
       })
       .catch(error => {
@@ -43,8 +48,20 @@ export class Main extends Component {
       });
   }
 
+  storeMarkers = marker => {
+    // Add the markers to the state array only if the array is empty (meaning
+    // this hasn't been done yet). Without the conditional, using the filter
+    // and then clearing it will add extra copies of the markers to the array.
+    if (this.state.markers.length === 0) {
+      this.setState(prevState => ({
+        markers: [...prevState.markers, marker]
+      }));
+    }
+  };
+
   render() {
-    if (this.state.placeList.length === 0) {
+    console.log("render main");
+    if (this.state.places.length === 0) {
       // Don't render the component until the data has been fetched
       return (
         <div>
@@ -54,7 +71,7 @@ export class Main extends Component {
       );
     } else {
       // When the data is ready, render App and pass the places down as props
-      return <App placeList={this.state.placeList} {...this.state} />;
+      return <App storeMarkers={this.storeMarkers} {...this.state} />;
     }
   }
 }

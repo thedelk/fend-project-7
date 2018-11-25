@@ -9,18 +9,17 @@ const MapContainer = props => {
     filterTerm,
     storeMarkers,
     google,
-    markerActivate,
     markerDeactivate,
     mapCenter,
     markerInfoWindowShowing,
     markerSelected,
     onClickMarker,
-    placeList,
+    places,
     placeSelected,
     mapZoom
   } = props;
 
-  const markers = placeList
+  const markerss = places
     .filter(
       place => place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
     )
@@ -31,8 +30,9 @@ const MapContainer = props => {
           id={place.id}
           key={place.id}
           name={place.name}
-          // onClick={markerActivate.bind(this)}
           onClick={onClickMarker.bind(place)}
+          // onClick={onClickMarker.bind(place)}
+          // onClick={onClickMarker}
           position={place.position}
           ref={storeMarkers}
         />
@@ -45,7 +45,6 @@ const MapContainer = props => {
   // selected, which would result in an error.
   const infoWindowContent = placeSelected ? (
     <div>
-      {console.log(placeSelected)}
       <h3>{placeSelected.name}</h3>
       <p>{placeSelected.id}</p>
     </div>
@@ -66,15 +65,16 @@ const MapContainer = props => {
       styles={theme}
       zoom={mapZoom}
     >
-      {markers}
+      {markerss}
       <InfoWindow
-        marker={markerSelected}
+        // marker={markerSelected}
+        marker={placeSelected}
         onClose={markerDeactivate}
         visible={markerInfoWindowShowing}
       >
         <section>{infoWindowContent}</section>
       </InfoWindow>
-      {console.log("map render")}
+      {/* {console.log("map render")} */}
     </Map>
   );
 };
