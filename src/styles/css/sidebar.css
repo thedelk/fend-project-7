@@ -26,8 +26,9 @@
 
 input {
   background-color: #fafbfb;
-  border: 0;
+  border: hidden;
   font-size: 1rem;
+  width: 100%;
 }
 
 input::-webkit-input-placeholder {

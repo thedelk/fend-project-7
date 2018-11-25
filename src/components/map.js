@@ -5,21 +5,19 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
-    // deselectMarker,
     filterTerm,
     storeMarkers,
     google,
     markerDeactivate,
     mapCenter,
     markerInfoWindowShowing,
-    markerSelected,
     onClickMarker,
     places,
     placeSelected,
     mapZoom
   } = props;
 
-  const markerss = places
+  const markers = places
     .filter(
       place => place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
     )
@@ -31,8 +29,6 @@ const MapContainer = props => {
           key={place.id}
           name={place.name}
           onClick={onClickMarker.bind(place)}
-          // onClick={onClickMarker.bind(place)}
-          // onClick={onClickMarker}
           position={place.position}
           ref={storeMarkers}
         />
@@ -65,16 +61,14 @@ const MapContainer = props => {
       styles={theme}
       zoom={mapZoom}
     >
-      {markerss}
+      {markers}
       <InfoWindow
-        // marker={markerSelected}
         marker={placeSelected}
         onClose={markerDeactivate}
         visible={markerInfoWindowShowing}
       >
         <section>{infoWindowContent}</section>
       </InfoWindow>
-      {/* {console.log("map render")} */}
     </Map>
   );
 };
