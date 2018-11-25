@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
+import { GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
 import "../styles/css/layout.css";
 import MapContainer from "./map";
@@ -13,15 +13,7 @@ export class App extends Component {
   state = {
     filterTerm: "",
     filteredList: [],
-    mapCenter: {
-      lat: 35.465076,
-      lng: -97.507373
-    },
-    mapZoom: 12,
     markerInfoWindowShowing: false,
-    // markerList: [],
-    // markerSelected: undefined,
-    // placeDetails: {},
     placeSelected: undefined
   };
 
@@ -43,7 +35,7 @@ export class App extends Component {
     });
   };
 
-  onClickMarker = (props, marker) => {
+  onClickPlace = (props, marker) => {
     // What to do when a marker is clicked.
     if (this.state.placeSelected === marker) {
       // Clicking the already active marker will deactivate it.
@@ -67,17 +59,7 @@ export class App extends Component {
   };
 
   render() {
-    const {
-      filterTerm,
-      // filteredList,
-      markerInfoWindowShowing,
-      markerSelected,
-      placeSelected,
-      mapCenter,
-      mapZoom
-    } = this.state;
-
-    const { placeList, markers, places, storeMarkers } = this.props;
+    const { mapCenter, mapZoom, markers, places, storeMarkers } = this.props;
 
     if (!places) {
       return (
@@ -96,13 +78,12 @@ export class App extends Component {
                 <Sidebar
                   deselectMarker={this.deselectMarker}
                   filterList={this.filterList.bind(this)}
-                  filterTerm={filterTerm}
-                  // filteredList={filteredList}
+                  filterTerm={this.state.filterTerm}
                   markers={markers}
-                  onClickMarker={this.onClickMarker}
                   onClickListItem={this.onClickListItem}
+                  onClickPlace={this.onClickPlace}
+                  placeSelected={this.state.placeSelected}
                   places={places}
-                  placeSelected={placeSelected}
                 />
               </div>
             ) : (
@@ -112,20 +93,17 @@ export class App extends Component {
             )}
             <div className="map">
               <MapContainer
-                filterTerm={filterTerm}
-                // filteredList={filteredList}
-                markers={markers}
-                storeMarkers={storeMarkers}
+                filterTerm={this.state.filterTerm}
                 mapCenter={mapCenter}
                 mapZoom={mapZoom}
                 markerActivate={this.markerActivate}
                 markerDeactivate={this.markerDeactivate}
-                markerInfoWindowShowing={markerInfoWindowShowing}
-                markerSelected={markerSelected}
-                onClickMarker={this.onClickMarker}
+                markerInfoWindowShowing={this.state.markerInfoWindowShowing}
+                markers={markers}
+                onClickPlace={this.onClickPlace}
+                placeSelected={this.state.placeSelected}
                 places={places}
-                placeList={placeList}
-                placeSelected={placeSelected}
+                storeMarkers={storeMarkers}
               />
             </div>
           </main>

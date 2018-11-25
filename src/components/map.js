@@ -11,7 +11,7 @@ const MapContainer = props => {
     markerDeactivate,
     mapCenter,
     markerInfoWindowShowing,
-    onClickMarker,
+    onClickPlace,
     places,
     placeSelected,
     mapZoom
@@ -28,7 +28,7 @@ const MapContainer = props => {
           id={place.id}
           key={place.id}
           name={place.name}
-          onClick={onClickMarker.bind(place)}
+          onClick={onClickPlace.bind(place)}
           position={place.position}
           ref={storeMarkers}
         />

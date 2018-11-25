@@ -7,9 +7,13 @@ import App from "./app";
 export class Main extends Component {
   // TODO: Implement static placeholder data if the data fetch fails
   state = {
-    placeList: [],
     places: [],
     markers: [],
+    mapCenter: {
+      lat: 35.465076,
+      lng: -97.507373
+    },
+    mapZoom: 12,
     // TODO: Change render to include an "else if" that changes the return
     // HTML to let the user know there was an issue (maybe remove the alert)
     // in the request's error catch
@@ -29,9 +33,7 @@ export class Main extends Component {
           };
         });
         this.setState({
-          placeList: places,
           places: places
-          // markers: places
         });
       })
       .catch(error => {

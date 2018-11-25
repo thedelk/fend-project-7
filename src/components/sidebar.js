@@ -4,7 +4,7 @@ import { G_KEY } from "../util/auth.js";
 import "../styles/css/sidebar.css";
 
 export const Sidebar = props => {
-  const { filterList, filterTerm, markers, onClickMarker, places } = props;
+  const { filterList, filterTerm, markers, onClickPlace, places } = props;
 
   // Render the list of places only if the markerList array has been populated.
   // The list is dependent upon the MapContainer component completing to store
@@ -21,11 +21,7 @@ export const Sidebar = props => {
         <li
           className="place"
           key={place.id}
-          onClick={onClickMarker.bind(
-            this,
-            thisMarker.props,
-            thisMarker.marker
-          )}
+          onClick={onClickPlace.bind(this, thisMarker.props, thisMarker.marker)}
         >
           {place.name}
         </li>
