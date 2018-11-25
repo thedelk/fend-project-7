@@ -5,11 +5,6 @@ const QUERY = "coffee";
 const LOCATION = "Oklahoma City";
 const VERSION = "20182507";
 const ENDPOINT = "https://api.foursquare.com/v2/venues/search?";
-// const PARAMS = {
-//   query: "coffee",
-//   near: "Oklahoma City",
-//   v: "20182507"
-// };
 
 const FS_URL_FULL = FS_URL.concat(`${QUERY}&near=${LOCATION}&v=${VERSION}`);
 
