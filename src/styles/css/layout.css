@@ -10,9 +10,9 @@
 }
 
 .map {
-  -webkit-box-flex: 2;
-      -ms-flex: 2;
-          flex: 2;
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
   position: relative;
 }
 
