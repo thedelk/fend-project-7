@@ -36,7 +36,9 @@ const QUERY_PARAMS = {
 const queryParamsString = Object.keys(QUERY_PARAMS)
   .map(key => `${key}=${QUERY_PARAMS[key]}`)
   .join("&")
-  .replace(" ", "_");
+  .replace(" ", "+");
+
+console.log(queryParamsString);
 
 //
 //
@@ -50,9 +52,31 @@ class Helper {
   }
 
   static getUrl() {
+    console.log([...arguments][0]);
     console.log([...arguments][0][0]);
     let theseArgs = [...arguments][0][0];
-    console.log(theseArgs);
+    // let testt = theseArgs.forEach(arg => console.log(arg));
+    // let testt = theseArgs.forEach(obj => Object.keys(obj)[0]);
+    let arrrg = new URLSearchParams();
+
+    theseArgs.forEach(arg => {
+      for (const [key, value] of Object.entries(arg)) {
+        arrrg.append(key, value);
+        // console.log(`${key}=${value}`);
+      }
+    });
+
+    console.log(arrrg.toString());
+
+    // for (const [key, value] of Object.entries(theseArgs)) {
+    //   console.log(`${key}: ${value}`);
+    // }
+
+    // arrrg.append()
+
+    // console.log(testt);
+    // console.log(arrrg);
+    // console.log(arrrg.toString());
 
     // let testing = theseArgs.map(arg => ({}))
 
@@ -72,7 +96,8 @@ class Helper {
     // 4fc4db63e4b0d9d21ed8cae2
 
     // return `${BASE_URL}${param}${query}&${creds}`;
-    return `https://api.foursquare.com/v2/venues/search?query=coffee&near=Oklahoma+City&v=20182507&client_id=XATAV0HZ0MUVRNP2DMR4202KKJVBPO4PPHI21YNDSNKBSXUC&client_secret=HTTEZQMQKMOGQXK1PWLOC3UTZI3HTWLULBMGZG5RY5T4UH1X`;
+    // return `https://api.foursquare.com/v2/venues/search?query=coffee&near=Oklahoma+City&v=20182507&client_id=XATAV0HZ0MUVRNP2DMR4202KKJVBPO4PPHI21YNDSNKBSXUC&client_secret=HTTEZQMQKMOGQXK1PWLOC3UTZI3HTWLULBMGZG5RY5T4UH1X`;
+    return `https://api.foursquare.com/v2/venues/search?v=20182507&client_id=XATAV0HZ0MUVRNP2DMR4202KKJVBPO4PPHI21YNDSNKBSXUC&client_secret=HTTEZQMQKMOGQXK1PWLOC3UTZI3HTWLULBMGZG5RY5T4UH1X&query=coffee&near=Oklahoma+City`;
   }
 }
 
@@ -80,6 +105,7 @@ export default class RequestCopy {
   static getPlaces() {
     // return Helper.getResponse("search?");
     return Helper.getResponse(QUERY_PARAMS, CREDENTIALS);
+    // return Helper.getResponse("4fc4db63e4b0d9d21ed8cae2");
   }
 
   static getPlacesData(id) {

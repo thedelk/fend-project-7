@@ -42,7 +42,7 @@ const MapContainer = props => {
     });
 
   function getInfo(detail) {
-    console.log(detail);
+    // console.log(detail);
 
     let place = detail.location;
     let placeName = detail.name;

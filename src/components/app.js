@@ -28,8 +28,8 @@ export class App extends Component {
   };
 
   markerActivate = (props, marker) => {
-    console.log(props);
-    console.log(marker);
+    // console.log(props);
+    // console.log(marker);
     this.setState({
       markerInfoWindowShowing: true,
       placeSelected: marker,
@@ -47,7 +47,7 @@ export class App extends Component {
   onClickPlace = (props, marker) => {
     // Search the "places" props for the Foursquare venue that has
     // the same id as the marker/list item selected
-    console.log(props);
+    // console.log(props);
     let details = this.props.places.find(place => props.id === place.id);
 
     // Clicking the already active place will deactivate it.
