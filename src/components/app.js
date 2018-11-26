@@ -16,6 +16,7 @@ export class App extends Component {
   // TODO: Store place details so marker infoWindows can access it to display
   // TODO: Make app accessible
   state = {
+    animating: false,
     filterTerm: "",
     filteredList: [],
     markerInfoWindowShowing: false,
@@ -24,36 +25,82 @@ export class App extends Component {
   };
 
   handleMarkerAnimation = () => {
-    // Logic to handle turning on/off marker animation upon selection
+    // console.log(this.state.placeSelected);
+    // this.state.placeSelected.setAnimation(window.google.maps.Animation.BOUNCE);
+
+    // console.log(
+    //   this.props.markers.find(marker => marker.marker.animating === true).marker
+    // this.props.markers
+    // );
+
+    // console.log(bouncyBoy);
+
+    console.log(this.state);
+    if (!this.state.placeSelected) {
+      console.log(this.state);
+      if (this.props.markers.find(marker => marker.marker.animating === true)) {
+        console.log(this.props.markers);
+        let bouncyBoy = this.props.markers.find(
+          marker => marker.marker.animating === true
+        ).marker;
+        console.log(bouncyBoy);
+        bouncyBoy.setAnimation(window.google.maps.Animation.null);
+      }
+    } else {
+      console.log(this.state);
+      if (this.props.markers.find(marker => marker.marker.animating === true)) {
+        console.log(this.state);
+        let bouncyBoy = this.props.markers.find(
+          marker => marker.marker.animating === true
+        ).marker;
+        bouncyBoy.setAnimation(window.google.maps.Animation.null);
+        this.state.placeSelected.setAnimation(
+          window.google.maps.Animation.BOUNCE
+        );
+      } else {
+        console.log(this.state);
+        this.state.placeSelected.setAnimation(
+          window.google.maps.Animation.BOUNCE
+        );
+      }
+    }
   };
 
   markerActivate = (props, marker) => {
-    // console.log(props);
-    // console.log(marker);
-    this.setState({
-      markerInfoWindowShowing: true,
-      placeSelected: marker,
-      placeSelectedDetails: props
-    });
+    console.log(marker);
+    this.setState(
+      {
+        markerInfoWindowShowing: true,
+        placeSelected: marker,
+        placeSelectedDetails: props
+      },
+      () => this.handleMarkerAnimation()
+    );
   };
 
   markerDeactivate = () => {
-    this.setState({
-      markerInfoWindowShowing: false,
-      placeSelected: undefined
-    });
+    this.setState(
+      {
+        markerInfoWindowShowing: false,
+        placeSelected: undefined
+      },
+      () => this.handleMarkerAnimation()
+    );
+
+    // this.props.markers
+    //   .find(marker => marker.marker.animating === true)
+    //   .marker.setAnimation(window.google.maps.Animation.null);
   };
 
   onClickPlace = (props, marker) => {
     // Search the "places" props for the Foursquare venue that has
     // the same id as the marker/list item selected
-    // console.log(props);
     let details = this.props.places.find(place => props.id === place.id);
 
     // Clicking the already active place will deactivate it.
     // Otherwise, select this place and activate its marker.
     this.state.placeSelected === marker
-      ? this.markerDeactivate(marker)
+      ? this.markerDeactivate()
       : this.markerActivate(details, marker);
   };
 
@@ -92,6 +139,7 @@ export class App extends Component {
                   markers={markers}
                   onClickPlace={this.onClickPlace}
                   places={places}
+                  placeSelected={this.state.placeSelected}
                 />
               </div>
             ) : (
