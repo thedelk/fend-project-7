@@ -7,7 +7,6 @@ import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
 import Request from "../util/requests";
-import RequestCopy from "../util/requestsCopy";
 import App from "./app";
 
 export class Main extends Component {
@@ -27,7 +26,7 @@ export class Main extends Component {
   };
 
   componentDidMount() {
-    RequestCopy.getPlaces()
+    Request.getPlaces()
       .then(results => {
         this.setState({
           places: results.response.venues.map(place => {
@@ -53,10 +52,6 @@ export class Main extends Component {
         //   "Error fetching data. Please check your internet connection, or try again later."
         // );
       });
-
-    // RequestCopy.getPlacesData("4fc4db63e4b0d9d21ed8cae2").then(response => {
-    //   console.log(response);
-    // });
   }
 
   storeMarkers = marker => {
@@ -86,13 +81,13 @@ export class Main extends Component {
       // return (
       //   <div>
       //     <h1>Done!</h1>
-      //     {this.state.places.map(place => (
+      //     {/* {this.state.places.map(place => (
       //       <div key={place.id}>
       //         <h2>{place.name}</h2>
       //         <p>{place.id}</p>
       //         <p />
       //       </div>
-      //     ))}
+      //     ))} */}
       //   </div>
       // );
     }
