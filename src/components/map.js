@@ -10,6 +10,7 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
+    filteredList,
     filterTerm,
     storeMarkers,
     google,

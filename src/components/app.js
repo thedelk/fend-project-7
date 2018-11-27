@@ -12,53 +12,45 @@ import Sidebar from "./sidebar";
 // import Header from "./header";
 
 export class App extends Component {
-  // TODO: Configure active marker animation
   // TODO: Store place details so marker infoWindows can access it to display
   // TODO: Make app accessible
   state = {
-    animating: false,
     filterTerm: "",
     filteredList: [],
-    markerInfoWindowShowing: false,
+    markerInfoWindowShowing: undefined,
     placeSelected: undefined,
     placeSelectedDetails: undefined
   };
 
   handleMarkerAnimation = () => {
-    // console.log(this.state.placeSelected);
-    // this.state.placeSelected.setAnimation(window.google.maps.Animation.BOUNCE);
-
-    // console.log(
-    //   this.props.markers.find(marker => marker.marker.animating === true).marker
-    // this.props.markers
-    // );
-
-    // console.log(bouncyBoy);
-
-    console.log(this.state);
+    // If there is no place selected (meaning there is no active marker)
     if (!this.state.placeSelected) {
-      console.log(this.state);
+      // If there is still a marker bouncing
+      // This will be true if a marker has recently been deactivated. Its
+      // animation will still be set to true, so it needs to be turned off.
       if (this.props.markers.find(marker => marker.marker.animating === true)) {
-        console.log(this.props.markers);
-        let bouncyBoy = this.props.markers.find(
-          marker => marker.marker.animating === true
-        ).marker;
-        console.log(bouncyBoy);
-        bouncyBoy.setAnimation(window.google.maps.Animation.null);
+        // If this is the case, find the marker and set its animation to null
+        this.props.markers
+          .find(marker => marker.marker.animating === true)
+          .marker.setAnimation(window.google.maps.Animation.null);
       }
     } else {
-      console.log(this.state);
+      // Otherwise, there will be an active marker somewhere
+      // If there is a marker bouncing
+      // This will be true if a marker was already active but a different place
+      // was selected
       if (this.props.markers.find(marker => marker.marker.animating === true)) {
-        console.log(this.state);
-        let bouncyBoy = this.props.markers.find(
-          marker => marker.marker.animating === true
-        ).marker;
-        bouncyBoy.setAnimation(window.google.maps.Animation.null);
+        // Find the marker that is bouncing and set its animation to null
+        this.props.markers
+          .find(marker => marker.marker.animating === true)
+          .marker.setAnimation(window.google.maps.Animation.null);
+        // Find the new active place and make its marker bounce
         this.state.placeSelected.setAnimation(
           window.google.maps.Animation.BOUNCE
         );
       } else {
-        console.log(this.state);
+        // Otherwise, a place will be selected for the first time.
+        // Make that place's marker bounce
         this.state.placeSelected.setAnimation(
           window.google.maps.Animation.BOUNCE
         );
@@ -67,34 +59,38 @@ export class App extends Component {
   };
 
   markerActivate = (props, marker) => {
-    console.log(marker);
+    // Open the place's info window, set it as selected
     this.setState(
       {
         markerInfoWindowShowing: true,
         placeSelected: marker,
         placeSelectedDetails: props
       },
+      // Callback - after the place has been selected, determine
+      // how its animation should be handled. Used as a callback
+      // because this depends on the updated state.
       () => this.handleMarkerAnimation()
     );
   };
 
   markerDeactivate = () => {
+    // Close the info window, deselect the place
     this.setState(
       {
-        markerInfoWindowShowing: false,
-        placeSelected: undefined
+        markerInfoWindowShowing: undefined,
+        placeSelected: undefined,
+        placeSelectedDetails: undefined
       },
+      // Callback - after the place has been deselected, determine
+      // how its animation should be handled. Used as a callback
+      // because this depends on the updated state.
       () => this.handleMarkerAnimation()
     );
-
-    // this.props.markers
-    //   .find(marker => marker.marker.animating === true)
-    //   .marker.setAnimation(window.google.maps.Animation.null);
   };
 
   onClickPlace = (props, marker) => {
     // Search the "places" props for the Foursquare venue that has
-    // the same id as the marker/list item selected
+    // the same id as the marker/list item selected.
     let details = this.props.places.find(place => props.id === place.id);
 
     // Clicking the already active place will deactivate it.
@@ -104,16 +100,33 @@ export class App extends Component {
       : this.markerActivate(details, marker);
   };
 
-  // FIXME: If a marker is selected and its info window is showing,
-  // filtering out the result from the list does not remove the
-  // marker's associated info window
   filterList = filterTerm => {
-    this.setState({
-      filterTerm: filterTerm,
-      filteredList: this.props.places.filter(place => {
-        return place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0;
-      })
-    });
+    // Update the filter term based on user input and subsequently
+    // write the remaining places to a new array.
+    this.setState(
+      {
+        filterTerm: filterTerm,
+        filteredList: this.props.places.filter(place => {
+          return (
+            place.name.toLowerCase().indexOf(filterTerm.toLowerCase()) >= 0
+          );
+        })
+      },
+      // Callback - after the list has been filtered, check if there is an
+      // active place. If so, find out if it is in the newly filtered
+      // list. If not, deselect the place and deactivate its marker.
+      () => {
+        if (this.state.placeSelected) {
+          if (
+            !this.state.filteredList
+              .map(place => place.id)
+              .includes(this.state.placeSelected.id)
+          ) {
+            this.markerDeactivate();
+          }
+        }
+      }
+    );
   };
 
   render() {
@@ -149,6 +162,7 @@ export class App extends Component {
             )}
             <div className="map">
               <MapContainer
+                filteredList={this.state.filteredList}
                 filterTerm={this.state.filterTerm}
                 mapCenter={mapCenter}
                 mapZoom={mapZoom}
