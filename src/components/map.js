@@ -10,6 +10,7 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
+    filteredList,
     filterTerm,
     storeMarkers,
     google,
@@ -30,7 +31,7 @@ const MapContainer = props => {
     .map(place => {
       return (
         <Marker
-          // animation={google.maps.Animation.DROP}
+          animation={google.maps.Animation.DROP}
           id={place.id}
           key={place.id}
           name={place.name}
@@ -41,6 +42,7 @@ const MapContainer = props => {
       );
     });
 
+  // TODO: Utilize getPlacesData() request to obtain more specific place details
   function getInfo(detail) {
     // console.log(detail);
 
