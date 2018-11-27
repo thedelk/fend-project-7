@@ -8,7 +8,7 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  max-height: 100vh;
+  max-height: 100%;
   overflow: auto;
 }
 
@@ -69,14 +69,14 @@ li {
 }
 
 li:hover {
-  background-color: #285151;
+  background-color: #234747;
   cursor: pointer;
   -webkit-transition: .1s ease;
   transition: .1s ease;
 }
 
 li:active {
-  background-color: #1e3d3d;
+  background-color: #193333;
   -webkit-transition: .2s ease;
   transition: .2s ease;
 }
