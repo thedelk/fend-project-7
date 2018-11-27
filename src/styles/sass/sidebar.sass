@@ -1,14 +1,4 @@
-// Colors
-$color-gray: #eaefef
-$color-teal-lightest: #fafbfb
-$color-teal-lighter: #5b8484
-$color-teal-light: #adc1c1
-$color-teal-primary: #366
-$color-teal-darker: #285151
-$color-teal-darkest: #1e3d3d
-$color-white: #fff
-
-
+@import color
 
 // Layout
 .sidebar
@@ -16,7 +6,7 @@ $color-white: #fff
   color: $color-gray
   display: flex
   flex-flow: column nowrap
-  max-height: 100vh
+  max-height: 100%
   overflow: auto
 
   .place
@@ -27,8 +17,6 @@ $color-white: #fff
     flex: 0
     font-size: 1.6rem
     padding: 1.4rem
-
-
 
 // Filter
 input
@@ -42,8 +30,6 @@ input
   &:focus::placeholder
     opacity: 0
 
-
-
 // Transitions
 li
   transition: .4s ease
@@ -56,8 +42,6 @@ li
   &:active
     background-color: $color-teal-darkest
     transition: .2s ease
-
-
 
 // Scrollbar
 ::-webkit-scrollbar
@@ -90,4 +74,3 @@ li
 
 ::-webkit-scrollbar-corner
   background: transparent
-

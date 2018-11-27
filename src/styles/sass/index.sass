@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400)
-
-$color-teal-lighter: #5b8484
+@import color
 
 *,
 *::before,
@@ -29,6 +28,10 @@ body
 code
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
 
+iframe
+  line-height: 0
+  max-height: 100%
+
 ol,
 li
   list-style: none
@@ -37,16 +40,13 @@ p
   font-size: 1.4rem
   margin-top: .6rem
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
-  color: $color-teal-lighter
-  margin-bottom: 2rem
+h1
+  margin: 0
+  padding: 0
 
 h3
+  color: $color-teal-lighter
   font-size: 1.8rem
   font-weight: 400
+  margin-bottom: 2rem
   margin-top: .8rem

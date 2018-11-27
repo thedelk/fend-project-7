@@ -1,0 +1,38 @@
+.footer {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #234747;
+  color: #eaefef;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 100;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+}
+
+.footer h4 {
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: .1rem;
+  padding: 2.2rem;
+  word-spacing: .2rem;
+}
+
+.footer a {
+  color: #a384a3;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.footer a:hover {
+  color: #eaefef;
+}
+/*# sourceMappingURL=footer.css.map */

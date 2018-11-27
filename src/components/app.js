@@ -9,7 +9,7 @@ import { G_KEY } from "../util/auth.js";
 import "../styles/css/layout.css";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
-// import Header from "./header";
+import Footer from "./footer";
 
 export class App extends Component {
   // TODO: Store place details so marker infoWindows can access it to display
@@ -141,8 +141,7 @@ export class App extends Component {
       );
     } else {
       return (
-        <div role="application">
-          {/* <Header /> */}
+        <div role="application" className="appy">
           <main className="container" role="application">
             {markers.length > 0 ? (
               <div className="sidebar">
@@ -178,6 +177,7 @@ export class App extends Component {
               />
             </div>
           </main>
+          <Footer />
         </div>
       );
     }
