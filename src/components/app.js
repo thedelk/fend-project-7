@@ -1,14 +1,10 @@
-// @Author:             Ryan Delk
-// @Date:               2018-11-25 14:08:50
-// @Last Modified by:   Ryan Delk
-// @Last Modified time: 2018-11-25 14:08:50
-
 import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
 import "../styles/css/layout.css";
 import MapContainer from "./map";
 import Sidebar from "./sidebar";
+import Loading from "./loading";
 import Footer from "./footer";
 
 export class App extends Component {
@@ -133,12 +129,7 @@ export class App extends Component {
     const { mapCenter, mapZoom, markers, places, storeMarkers } = this.props;
 
     if (!places) {
-      return (
-        <div>
-          <h1>Loading</h1>
-          <p>Fetching map data...</p>
-        </div>
-      );
+      return <Loading />;
     } else {
       return (
         <div role="application" className="appy">
@@ -156,7 +147,7 @@ export class App extends Component {
               </div>
             ) : (
               <div className="sidebar">
-                <h1>Loading...</h1>
+                <Loading />
               </div>
             )}
             <div className="map">

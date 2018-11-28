@@ -10,7 +10,6 @@ import theme from "../styles/map-theme";
 
 const MapContainer = props => {
   const {
-    filteredList,
     filterTerm,
     storeMarkers,
     google,
@@ -74,20 +73,20 @@ const MapContainer = props => {
   // otherwise set the info window content to an empty string.
   // This is to prevent trying to retrieve this information when a place hasn't been
   // selected, which would result in an error.
-  const infoWindowContent = placeSelectedDetails ? (
-    <div className="info-window">
-      <h3>{placeSelectedDetails.name}</h3>
-      <p>{placeSelectedDetails.location.address}</p>
-      <p>
-        {`${placeSelectedDetails.location.city}, ${
-          placeSelectedDetails.location.state
-        } ${placeSelectedDetails.location.postalCode}`}
-      </p>
-      <p>{placeSelectedDetails.location.country}</p>
-    </div>
-  ) : (
-    ""
-  );
+  // const infoWindowContent = placeSelectedDetails ? (
+  //   <div className="info-window">
+  //     <h3>{placeSelectedDetails.name}</h3>
+  //     <p>{placeSelectedDetails.location.address}</p>
+  //     <p>
+  //       {`${placeSelectedDetails.location.city}, ${
+  //         placeSelectedDetails.location.state
+  //       } ${placeSelectedDetails.location.postalCode}`}
+  //     </p>
+  //     <p>{placeSelectedDetails.location.country}</p>
+  //   </div>
+  // ) : (
+  //   ""
+  // );
 
   return (
     <Map
@@ -111,7 +110,6 @@ const MapContainer = props => {
         <section>
           {placeSelectedDetails ? getInfo(placeSelectedDetails) : undefined}
         </section>
-        {/* <section>{infoWindowContent}</section> */}
       </InfoWindow>
     </Map>
   );

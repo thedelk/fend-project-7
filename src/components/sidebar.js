@@ -36,13 +36,14 @@ export const Sidebar = props => {
   return (
     <aside>
       <input
-        type="text"
-        placeholder="Filter"
         className="input-filter"
-        value={filterTerm}
         onChange={event => filterList(event.target.value)}
+        placeholder="Filter"
+        tabIndex={0}
+        type="text"
+        value={filterTerm}
       />
-      <ul>{listItems}</ul>
+      <ul tabIndex={0}>{listItems}</ul>
     </aside>
   );
 };

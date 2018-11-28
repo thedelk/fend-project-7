@@ -1,16 +1,12 @@
-// @Author:             Ryan Delk
-// @Date:               2018-11-25 14:05:53
-// @Last Modified by:   Ryan Delk
-// @Last Modified time: 2018-11-25 14:05:53
-
 import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import { G_KEY } from "../util/auth.js";
 import Request from "../util/requests";
+import Loading from "./loading";
+import Error from "./error";
 import App from "./app";
 
 export class Main extends Component {
-  // TODO: Implement static placeholder data if the data fetch fails
   state = {
     places: [],
     markers: [],
@@ -19,9 +15,6 @@ export class Main extends Component {
       lng: -97.507373
     },
     mapZoom: 12,
-    // TODO: Change render to include an "else if" that changes the return
-    // HTML to let the user know there was an issue (maybe remove the alert)
-    // in the request's error catch
     error: false
   };
 
@@ -48,9 +41,6 @@ export class Main extends Component {
           "Error setting initial state in componentDidMount() [app.js]"
         );
         console.log(error);
-        // alert(
-        //   "Error fetching data. Please check your internet connection, or try again later."
-        // );
       });
   }
 
@@ -66,30 +56,14 @@ export class Main extends Component {
   };
 
   render() {
-    console.log("render main");
-    if (this.state.places.length === 0) {
+    if (this.state.places.length === 0 && this.state.error === false) {
       // Don't render the component until the data has been fetched
-      return (
-        <div>
-          <h1>Loading</h1>
-          <p>Fetching map data...</p>
-        </div>
-      );
+      return <Loading />;
+    } else if (this.state.error === true) {
+      return <Error />;
     } else {
       // When the data is ready, render App and pass the places down as props
       return <App storeMarkers={this.storeMarkers} {...this.state} />;
-      // return (
-      //   <div>
-      //     <h1>Done!</h1>
-      //     {/* {this.state.places.map(place => (
-      //       <div key={place.id}>
-      //         <h2>{place.name}</h2>
-      //         <p>{place.id}</p>
-      //         <p />
-      //       </div>
-      //     ))} */}
-      //   </div>
-      // );
     }
   }
 }
