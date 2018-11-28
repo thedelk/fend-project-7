@@ -16,6 +16,7 @@ The following are a few libraries on which this project is dependent.  A huge th
 
 - [axios](https://www.npmjs.com/package/axios)
 - [eslint](https://eslint.org) & [prettier](https://prettier.io)
+- [foursquare](https://developer.foursquare.com)
 - [google-maps-react](https://www.npmjs.com/package/google-maps-react)
 - [react-dom](https://www.npmjs.com/package/react-dom)
 - [react-scripts](https://www.npmjs.com/package/react-scripts)
