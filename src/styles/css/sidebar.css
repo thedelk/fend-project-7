@@ -6,8 +6,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+      -ms-flex-flow: column;
+          flex-flow: column;
   max-height: 100%;
   overflow: auto;
 }

@@ -1,3 +1,49 @@
+# Neighborhood Map - OKC Coffee
+
+## Contents
+
+## Introduction
+
+This is the final project for Udacity's Front-End Nanodegree program.  The goal was to create from scratch an application using React.js that utilizes the Google Maps API to display a local map of hotspots.
+
+This iteration searches local places around Oklahoma City with the keyword "coffee."
+
+## Dependencies
+
+### Libraries
+
+The following are a few libraries on which this project is dependent.  A huge thank-you to the developers and contributors to these utilities, because without them, this project would have been much more difficult!
+
+- [axios](https://www.npmjs.com/package/axios)
+- [eslint](https://eslint.org) & [prettier](https://prettier.io)
+- [google-maps-react](https://www.npmjs.com/package/google-maps-react)
+- [react-dom](https://www.npmjs.com/package/react-dom)
+- [react-scripts](https://www.npmjs.com/package/react-scripts)
+
+### Other
+
+- [milligram](https://milligram.io) - While I didn't use the entire Milligram CSS framework, I did use some aspects of it for styling
+
+## Using Locally
+
+To fire it up on your own machine, fork or clone your own copy.  You'll need a Google Maps API key and Foursquare API ID and Secret.
+
+1. From the project root, open a terminal and run `npm install` to install package dependencies.
+2. In `src/util` you'll need to create an `auth.js` file.  This is where your API keys will be called.  Make sure it looks like the following:
+    ```
+    export const FS_ID = "YOUR_FOURSQUARE_CLIENT_ID";
+    export const FS_SECRET = "YOUR_FOURSQUARE_CLIENT_SECRET";
+    export const G_KEY = "YOUR_GOOGLE_API_KEY";
+    ```
+3. Run `npm start` from your terminal to start up a local server instance at `http://localhost:3000`.
+4. Click around and have fun!
+
+## Contributing
+
+If you've read this far then you know this was an assigned project, and as such will not be open to pull requests or contributions. I imagine someone smarter than me could write it better, anyway!
+
+# Neighborhood Map (Original Rubric)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

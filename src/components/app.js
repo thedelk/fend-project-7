@@ -8,8 +8,6 @@ import Loading from "./loading";
 import Footer from "./footer";
 
 export class App extends Component {
-  // TODO: Store place details so marker infoWindows can access it to display
-  // TODO: Make app accessible
   state = {
     filterTerm: "",
     filteredList: [],
@@ -132,7 +130,7 @@ export class App extends Component {
       return <Loading />;
     } else {
       return (
-        <div role="application" className="appy">
+        <div role="application" className="app">
           <main className="container" role="application">
             {markers.length > 0 ? (
               <div className="sidebar">
